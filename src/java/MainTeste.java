@@ -1,8 +1,10 @@
+
 import persistencia.Cliente;
 import persistencia.ClienteDAO;
 
 public class MainTeste {
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
 
         Cliente c = new Cliente();
         c.setNome("Lauciano");
