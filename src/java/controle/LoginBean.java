@@ -17,7 +17,7 @@ package controle;
      private boolean isLoggedIn;  
       
      public LoginBean(){
-    	 username = "Nome de Usu·rio";
+    	 username = "Nome de Usu√°rio";
     	 password = "Senha";
     	 isLoggedIn = false;
      }
@@ -32,7 +32,7 @@ package controle;
       if(memberManager.authenticate(username, password)){  
        //changed the state to true  
        isLoggedIn=true;  
-       url="userhome.jsf";  
+       url="/faces/userhome.xhtml";  
       }else{  
        //set the message to display when authentication fails  
        FacesContext.getCurrentInstance().addMessage("frmLogin:btnLogin", new FacesMessage("Invalid Username and or Password"));  
@@ -46,7 +46,7 @@ package controle;
      */  
      public void verifyUseLogin(ComponentSystemEvent event){  
       if(!isLoggedIn){  
-       doRedirect("index.jsf");  
+       doRedirect("/faces/index.xhtml");  
       }  
      }  
       
@@ -57,7 +57,7 @@ package controle;
      private void doRedirect(String url){  
       try {  
        FacesContext context=FacesContext.getCurrentInstance();  
-       context.getExternalContext().redirect("index.jsf");  
+       context.getExternalContext().redirect("/faces/index.xhtml");  
       } catch (IOException e) {  
        e.printStackTrace();  
       }  
