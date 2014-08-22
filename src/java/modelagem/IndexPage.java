@@ -1,6 +1,5 @@
 package modelagem;
 
-import controle.LoginBean;
 import javax.annotation.PostConstruct;
 import javax.el.MethodExpression;
 import javax.el.ValueExpression;
@@ -10,6 +9,8 @@ import javax.faces.component.html.HtmlCommandButton;
 import javax.faces.component.html.HtmlForm;
 import javax.faces.component.html.HtmlInputSecret;
 import javax.faces.component.html.HtmlInputText;
+import javax.faces.component.html.HtmlOutputLink;
+import javax.faces.component.html.HtmlOutputText;
 import javax.faces.context.FacesContext;
 
 /**
@@ -19,33 +20,69 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @SessionScoped
 public class IndexPage {
-    private HtmlForm loginForm;
+    private HtmlForm rightForm;
     
     @PostConstruct
     public void init(){
-        loginForm = new HtmlForm();
-        loginForm.setId("frmLogin");
-        loginForm.setStyleClass("navbar-form navbar-right");
         
-        HtmlInputText usernameInput = new HtmlInputText();
-        ValueExpression loginUsername = createValueExpression("#{loginBean.username}", String.class);
-        usernameInput.setValueExpression("username", loginUsername);
-        usernameInput.setStyleClass("form-control");
-        
-        HtmlInputSecret passwordInput = new HtmlInputSecret();
-        ValueExpression loginPassword = createValueExpression("#{loginBean.password}", String.class);
-        passwordInput.setValueExpression("password", loginPassword);
-        passwordInput.setStyleClass("form-control");
-        
-        HtmlCommandButton loginButton = new HtmlCommandButton();
-        MethodExpression loginAction = createMethodExpression("#{loginBean.login}", String.class);
-        loginButton.setActionExpression(loginAction);
-        loginButton.setValue("Entrar");
-        loginButton.setStyleClass("btn btn-default");
-        
-        loginForm.getChildren().add(usernameInput);
-        loginForm.getChildren().add(passwordInput);
-        loginForm.getChildren().add(loginButton);
+            rightForm = new HtmlForm();
+            rightForm.setId("frmLogin");
+            
+            ValueExpression loginConfirmation = createValueExpression("#{loginConfirmation}", Boolean.class);
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            boolean log = (boolean) loginConfirmation.getValue(facesContext.getELContext());
+
+            if(log){
+                rightForm.setStyleClass("navbar-text navbar-right");
+                
+                HtmlInputSecret searchInput = new HtmlInputSecret();
+                ValueExpression searchSearch = createValueExpression("#{buscador.texto}", String.class);
+                searchInput.setValueExpression("busca", searchSearch);
+                searchInput.setStyleClass("form-control");
+
+                HtmlCommandButton searchButton = new HtmlCommandButton();
+                MethodExpression searchAction = createMethodExpression("#{loginBean.buscar}", String.class);
+                searchButton.setActionExpression(searchAction);
+                searchButton.setValue("<span class=\"glyphicon glyphicon-search\" />");
+                searchButton.setStyleClass("btn btn-default");
+                
+                HtmlOutputText welcomeOutput = new HtmlOutputText();
+                ValueExpression welcomeUsername = createValueExpression("#{loginBean.username}", String.class);
+                welcomeOutput.setValueExpression(null, loginConfirmation);
+                
+                HtmlOutputLink logoffOutput = new HtmlOutputLink();
+                logoffOutput.setValue("Sair");
+                
+                rightForm.getChildren().add(searchInput);
+                rightForm.getChildren().add(searchButton);
+                rightForm.getChildren().add(welcomeOutput);
+                rightForm.getChildren().add(logoffOutput);
+            } else {
+                rightForm.setStyleClass("navbar-form navbar-right");
+                
+                HtmlInputText usernameInput = new HtmlInputText();
+                ValueExpression loginUsername = createValueExpression("#{loginBean.username}", String.class);
+                usernameInput.setValueExpression("username", loginUsername);
+                usernameInput.setStyleClass("form-control");
+
+                HtmlInputSecret passwordInput = new HtmlInputSecret();
+                ValueExpression loginPassword = createValueExpression("#{loginBean.password}", String.class);
+                passwordInput.setValueExpression("password", loginPassword);
+                passwordInput.setStyleClass("form-control");
+
+                HtmlCommandButton loginButton = new HtmlCommandButton();
+                MethodExpression loginAction = createMethodExpression("#{loginBean.login}", String.class);
+                loginButton.setActionExpression(loginAction);
+                loginButton.setValue("Entrar");
+                loginButton.setStyleClass("btn btn-default");
+
+                rightForm.getChildren().add(usernameInput);
+                rightForm.getChildren().add(passwordInput);
+                rightForm.getChildren().add(loginButton);
+            }
+            
+            
+            
     }
     
     public static ValueExpression createValueExpression(String expression, Class<?> valueType) {
@@ -61,7 +98,7 @@ public class IndexPage {
     }
     
     public HtmlForm getLoginForm(){
-        return loginForm;
+        return rightForm;
     }
     
     public void setLoginForm(HtmlForm loginForm){
