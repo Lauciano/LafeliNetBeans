@@ -27,38 +27,30 @@ public class IndexPage {
         
             rightForm = new HtmlForm();
             rightForm.setId("frmLogin");
+            rightForm.setStyleClass("navbar-form navbar-right");
             
-            ValueExpression loginConfirmation = createValueExpression("#{loginConfirmation}", Boolean.class);
+            ValueExpression loginConfirmation = createValueExpression("#{loginBean.isLoggedIn}", Boolean.class);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            boolean log = (boolean) loginConfirmation.getValue(facesContext.getELContext());
+            Boolean log = (Boolean) loginConfirmation.getValue(facesContext.getELContext());
 
             if(log){
-                rightForm.setStyleClass("navbar-text navbar-right");
-                
-                HtmlInputSecret searchInput = new HtmlInputSecret();
-                ValueExpression searchSearch = createValueExpression("#{buscador.texto}", String.class);
-                searchInput.setValueExpression("busca", searchSearch);
-                searchInput.setStyleClass("form-control");
-
-                HtmlCommandButton searchButton = new HtmlCommandButton();
-                MethodExpression searchAction = createMethodExpression("#{loginBean.buscar}", String.class);
-                searchButton.setActionExpression(searchAction);
-                searchButton.setValue("<span class=\"glyphicon glyphicon-search\" />");
-                searchButton.setStyleClass("btn btn-default");
                 
                 HtmlOutputText welcomeOutput = new HtmlOutputText();
-                ValueExpression welcomeUsername = createValueExpression("#{loginBean.username}", String.class);
-                welcomeOutput.setValueExpression(null, loginConfirmation);
+                welcomeOutput.setValue("Olá, usuário.");
+                //ValueExpression welcomeUsername = createValueExpression("#{loginBean.username}", String.class);
+                //welcomeOutput.setValueExpression("welcome", welcomeUsername);
+                welcomeOutput.setStyleClass("navbar-text");
                 
-                HtmlOutputLink logoffOutput = new HtmlOutputLink();
+                HtmlOutputLink logoffLink = new HtmlOutputLink();
+                HtmlOutputText logoffOutput = new HtmlOutputText();
                 logoffOutput.setValue("Sair");
+                logoffOutput.setStyleClass("navbar-text");
+                logoffLink.getChildren().add(logoffOutput);
                 
-                rightForm.getChildren().add(searchInput);
-                rightForm.getChildren().add(searchButton);
                 rightForm.getChildren().add(welcomeOutput);
-                rightForm.getChildren().add(logoffOutput);
+                rightForm.getChildren().add(logoffLink);
+                
             } else {
-                rightForm.setStyleClass("navbar-form navbar-right");
                 
                 HtmlInputText usernameInput = new HtmlInputText();
                 ValueExpression loginUsername = createValueExpression("#{loginBean.username}", String.class);
@@ -80,9 +72,6 @@ public class IndexPage {
                 rightForm.getChildren().add(passwordInput);
                 rightForm.getChildren().add(loginButton);
             }
-            
-            
-            
     }
     
     public static ValueExpression createValueExpression(String expression, Class<?> valueType) {
@@ -97,11 +86,11 @@ public class IndexPage {
             facesContext.getELContext(), expression, returnType, parameterTypes);
     }
     
-    public HtmlForm getLoginForm(){
+    public HtmlForm getRightForm(){
         return rightForm;
     }
     
-    public void setLoginForm(HtmlForm loginForm){
+    public void setRightForm(HtmlForm rightForm){
         //DO NOTHING
     }
 }
