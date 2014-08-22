@@ -27,13 +27,13 @@ public class LoginBean implements Serializable {
         //custom member manager class  
         MemberManager memberManager = new MemberManager();
         //default url in case of login failure;  
-        String url = "index.jsf";
+        String url = "faces/indexmanual";
 
         //user a custom method to authenticate a user  
         if (memberManager.authenticate(username, password)) {
             //changed the state to true  
             isLoggedIn = true;
-            url = "/faces/userhome.xhtml";
+            url = "faces/userhome";
         } else {
             //set the message to display when authentication fails  
             FacesContext.getCurrentInstance().addMessage("frmLogin:btnLogin", new FacesMessage("Invalid Username and or Password"));
@@ -49,7 +49,7 @@ public class LoginBean implements Serializable {
      */
     public void verifyUseLogin(ComponentSystemEvent event) {
         if (!isLoggedIn) {
-            doRedirect("/faces/index.xhtml");
+            doRedirect("faces/index");
         }
     }
 
@@ -61,12 +61,17 @@ public class LoginBean implements Serializable {
     private void doRedirect(String url) {
         try {
             FacesContext context = FacesContext.getCurrentInstance();
-            context.getExternalContext().redirect("/faces/index.xhtml");
+            context.getExternalContext().redirect("faces/indexmanual");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    public String getLogin() {
+        return login();
+    }
+    
+    
     public String getUsername() {
         return username;
     }

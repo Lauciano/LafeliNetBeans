@@ -3,6 +3,7 @@ package modelagem;
 import controle.LoginBean;
 import javax.annotation.PostConstruct;
 import javax.el.MethodExpression;
+import javax.el.ValueExpression;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.html.HtmlCommandButton;
@@ -26,23 +27,31 @@ public class IndexPage {
         loginForm.setId("frmLogin");
         loginForm.setStyleClass("navbar-form navbar-right");
         
-        HtmlInputText username = new HtmlInputText();
-        username.setValue("#{loginBean.username}");
-        username.setStyleClass("form-control");
+        HtmlInputText usernameInput = new HtmlInputText();
+        ValueExpression loginUsername = createValueExpression("#{loginBean.username}", String.class);
+        usernameInput.setValueExpression("username", loginUsername);
+        usernameInput.setStyleClass("form-control");
         
-        HtmlInputSecret password = new HtmlInputSecret();
-        password.setValue("#{loginBean.password}");
-        password.setStyleClass("form-control");
+        HtmlInputSecret passwordInput = new HtmlInputSecret();
+        ValueExpression loginPassword = createValueExpression("#{loginBean.password}", String.class);
+        passwordInput.setValueExpression("password", loginPassword);
+        passwordInput.setStyleClass("form-control");
         
-        HtmlCommandButton login = new HtmlCommandButton();
-        MethodExpression loginAction = createMethodExpression("#{loginBean.login}", String.class, String.class, String.class);
-        login.setActionExpression(loginAction);
-        login.setValue("Entrar");
-        login.setStyleClass("btn btn-default");
+        HtmlCommandButton loginButton = new HtmlCommandButton();
+        MethodExpression loginAction = createMethodExpression("#{loginBean.login}", String.class);
+        loginButton.setActionExpression(loginAction);
+        loginButton.setValue("Entrar");
+        loginButton.setStyleClass("btn btn-default");
         
-        loginForm.getChildren().add(username);
-        loginForm.getChildren().add(password);
-        loginForm.getChildren().add(login);
+        loginForm.getChildren().add(usernameInput);
+        loginForm.getChildren().add(passwordInput);
+        loginForm.getChildren().add(loginButton);
+    }
+    
+    public static ValueExpression createValueExpression(String expression, Class<?> valueType) {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        return facesContext.getApplication().getExpressionFactory().createValueExpression(
+            facesContext.getELContext(), expression, valueType);
     }
     
     public static MethodExpression createMethodExpression(String expression, Class<?> returnType, Class<?>... parameterTypes) {
