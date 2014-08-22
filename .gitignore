@@ -4,6 +4,7 @@
 
 *.class
 nbproject/build-impl.xml
+nbproject/
 
 #################
 ## Eclipse
