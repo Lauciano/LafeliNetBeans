@@ -13,6 +13,7 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.ActionEvent;
 
 /**
  *
@@ -23,7 +24,8 @@ import javax.faces.bean.SessionScoped;
 public class Buscador {
     private String texto;
     private String tipo;
-    private Map<String,String> lista;
+    private Integer tipoView;
+    private Map<String,Integer> lista;
     
     public Buscador() {
         texto = "";
@@ -33,21 +35,23 @@ public class Buscador {
     @PostConstruct
     public void init() {
         lista = new HashMap<>();
-        lista.put("Cliente", "Cliente");
-        lista.put("Venda", "Venda");
-        lista.put("Produto", "Produto");
-        lista.put("Material", "Material");
-        lista.put("Compra", "Compra");
-        lista.put("Fornecedor", "Fornecedor");
+        lista.put("Cliente", 1);
+        lista.put("Venda", 2);
+        lista.put("Produto", 3);
+        lista.put("Material", 4);
+        lista.put("Compra", 5);
+        lista.put("Fornecedor", 6);
     }
     
-    public String buscar() {
-        return "";
+    public String buscar(ActionEvent e) {
+        tipoView = lista.get(tipo);
+        String comp = e.getComponent().getId();
+        return "search.xhtml#" + comp;
     }
     
-    public String getBuscar() {
-        return buscar();
-    }
+    //public String getBuscar() {
+    //    return buscar();
+    //}
     
     public String getTexto() {
         return texto;
@@ -65,11 +69,11 @@ public class Buscador {
         this.tipo = tipo;
     }
     
-    public Map<String, String> getLista(){
+    public Map<String, Integer> getLista(){
         return lista;
     }
     
-    public void setLista(HashMap<String, String> lista){
+    public void setLista(HashMap<String, Integer> lista){
         this.lista = lista;
     }
 }

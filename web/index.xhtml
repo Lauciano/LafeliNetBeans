@@ -59,8 +59,10 @@
                     </div>
                     <div class="row">
                         <div class="col-md-offset-5">
-                            <h:inputText value="#{buscador.texto}" style="width:25%" rendered="#{loginBean.isLoggedIn}" />
-                            <h:commandButton action="#{buscador.buscar}" value="Entrar" style="width:10%" id="btnSearch" rendered="#{loginBean.isLoggedIn}"/>
+                            <h:form id="frmSearch">
+                                <h:inputText value="#{buscador.texto}" id="txtSearch" style="width:25%" rendered="#{loginBean.isLoggedIn}" />
+                                <h:commandButton actionListener="#{buscador.buscar}" value="Buscar" style="width:10%" id="btnSearch" rendered="#{loginBean.isLoggedIn}"/>
+                            </h:form>
                         </div>
                     </div>
                 </div>
