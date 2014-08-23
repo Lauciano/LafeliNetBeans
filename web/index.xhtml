@@ -20,15 +20,24 @@
                 </h1>
             </header>
             <nav class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                    <h:outputText value="#{loginBean.username}" styleClass="navbar-brand" rendered="#{loginBean.isLoggedIn}" />
+                </div>
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="index.xhtml">Home</a></li>
-                            <li><a href="produtos.xhtml">Produtos</a></li>
+                            <li class="active">
+                                <a href="index.xhtml">Home</a>
+                            </li>
+                            <li>
+                                <a href="produtos.xhtml">Produtos</a>
+                            </li>
+                            <li>
+                                <p:link value="Cadastro" href="cadastro.xhtml" rendered="#{loginBean.isLoggedIn}" />
+                            </li>
                         </ul>
                         <div>
                             <h:form id="frmLogin" styleClass="navbar-form navbar-right">
-                                <h:outputText value="Olá, #{loginBean.username}" styleClass="navbar-text" rendered="#{loginBean.isLoggedIn}" />
                                 <h:commandButton action="#{loginBean.logoff}" value="Sair" styleClass="btn btn-default" rendered="#{loginBean.isLoggedIn}" />
                                 <h:inputText value="#{loginBean.username}" id="username" styleClass="form-control" rendered="#{loginBean.isNotLoggedIn}" />
                                 <h:inputSecret value="#{loginBean.password}" styleClass="form-control" rendered="#{loginBean.isNotLoggedIn}" />
@@ -39,58 +48,24 @@
                 </div>
             </nav>
             
-            <section class="navbar">
-                <h:form styleClass="container-fluid" rendered="#{loginBean.isLoggedIn}" >
-                    <p:growl autoUpdate="true"/>
-
-                    <p:panelMenu styleClass="collapse navbar-collapse" >
-                        <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Cliente">
-                            <p:menuitem value="Cadastrar" icon="ui-icon-disk" />
-                            <p:menuitem value="Remover" icon="ui-icon-closethick" />
-                            <p:menuitem value="Atualizar" icon="ui-icon-arrowrefresh-1-w" />
-                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
-                        </p:submenu>
-                        <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Venda">
-                            <p:menuitem value="Cadastrar" icon="ui-icon-disk" />
-                            <p:menuitem value="Remover" icon="ui-icon-closethick" />
-                            <p:menuitem value="Atualizar" icon="ui-icon-arrowrefresh-1-w" />
-                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
-                        </p:submenu>
-                        <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Produto">
-                            <p:menuitem value="Cadastrar" icon="ui-icon-disk" />
-                            <p:menuitem value="Remover" icon="ui-icon-closethick" />
-                            <p:menuitem value="Atualizar" icon="ui-icon-arrowrefresh-1-w" />
-                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
-                        </p:submenu>
-                        <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Material">
-                            <p:menuitem value="Cadastrar" icon="ui-icon-disk" />
-                            <p:menuitem value="Remover" icon="ui-icon-closethick" />
-                            <p:menuitem value="Atualizar" icon="ui-icon-arrowrefresh-1-w" />
-                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
-                        </p:submenu>
-                        <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Produto">
-                            <p:menuitem value="Cadastrar" icon="ui-icon-disk" />
-                            <p:menuitem value="Remover" icon="ui-icon-closethick" />
-                            <p:menuitem value="Atualizar" icon="ui-icon-arrowrefresh-1-w" />
-                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
-                        </p:submenu>
-                        <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Fornecedor">
-                            <p:menuitem value="Cadastrar" icon="ui-icon-disk" />
-                            <p:menuitem value="Remover" icon="ui-icon-closethick" />
-                            <p:menuitem value="Atualizar" icon="ui-icon-arrowrefresh-1-w" />
-                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
-                        </p:submenu>
-                    </p:panelMenu>
-                </h:form>
-            </section>
-            
             <section id="page-content-wrapper">
-                <div class="container-fluid">
+                <div class="container">
                     <div class="row">
-                        <div class="col-lg-12">
-                            <img class="img-responsive" style="margin: 0 auto;" src="resources/img/home.jpg" alt="Conjunto de Cadeiras Paradas"/>
+                        <div class="col-md-offset-5">
+                            <p:selectOneMenu value="#{buscador.tipo}" style="width:35%" rendered="#{loginBean.isLoggedIn}">
+                                <f:selectItems value="#{buscador.lista}" />
+                            </p:selectOneMenu>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-offset-5">
+                            <h:inputText value="#{buscador.texto}" style="width:25%" rendered="#{loginBean.isLoggedIn}" />
+                            <h:commandButton action="#{buscador.buscar}" value="Entrar" style="width:10%" id="btnSearch" rendered="#{loginBean.isLoggedIn}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <img class="img-responsive" style="margin: 0 auto;" src="resources/img/home.jpg" alt="Conjunto de Cadeiras Paradas"/>
                 </div>
             </section>
             <footer class="panel-footer">

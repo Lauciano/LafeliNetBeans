@@ -43,7 +43,7 @@ public class LoginBean implements Serializable {
         username = "Nome de Usuário";
         password = "Senha";
         isLoggedIn = false;
-        return "faces/index";
+        return "index.xhtml";
     }
     
     /**
