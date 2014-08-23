@@ -1,11 +1,14 @@
 package persistencia;
 
 import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+
+@ManagedBean
 @Entity(name = "CLIENTE")
 public class Cliente implements Serializable {
 	
@@ -27,6 +30,10 @@ public class Cliente implements Serializable {
 	private String telefones;
 	
 	public Cliente(){
+            nome = "";
+            sobrenome = "";
+            telefonep = "";
+            telefones = "";
 	}
 
 	public Integer getId() {

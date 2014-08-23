@@ -27,23 +27,14 @@
                             <li class="active"><a href="#">Home</a></li>
                             <li><a href="#">Produtos</a></li>
                         </ul>
-                        <div>
-                            <h:form binding="#{indexPage.loginForm}"/>
-                            <!--<h:form id="frmLogin" styleClass="navbar-form navbar-right">
-                                <h:inputText value="#{loginBean.username}" styleClass="form-control" />
-                                <h:inputSecret value="#{loginBean.password}" styleClass="form-control" />
-                                <h:commandButton action="#{loginBean.login}" value="Entrar" id="btnLogin" styleClass="btn btn-default" /> 
-                            </h:form>  -->
-                        </div>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </nav>
-            <section class="panel panel-default">
+            <section>
                 <h:form>
                     <p:growl autoUpdate="true"/>
 
                     <p:panelMenu style="width:300px">
-                        <!-- Falta o action listener -->
                         <p:submenu label="Cliente">
                             <p:menuitem value="Cadastrar" icon="ui-icon-disk" />
                             <p:menuitem value="Remover" icon="ui-icon-closethick" />
@@ -112,10 +103,5 @@
             </footer>
         </f:view>
         <br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
-        <br />
-        <h:link outcome="welcomePrimefaces" value="Página de boas-vindas do Primefaces" />
-        <br />
-        <h:link outcome="welcomePrimefaces" value="Página de boas-vindas do Primefaces" />
     </h:body>
 </html>

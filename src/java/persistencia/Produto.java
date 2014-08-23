@@ -1,12 +1,14 @@
 package persistencia;
 
 import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity(name = "PRODUTO")
+@ManagedBean
 public class Produto implements Serializable {
 	
 	@Id
@@ -49,5 +51,16 @@ public class Produto implements Serializable {
 	public void setPreco(double preco) {
 		this.preco = preco;
 	}
-	
+        
+        public void setPreco(Double preco) {
+            this.preco = preco;
+        }
+
+        public String getImagem() {
+            return imagem;
+        }
+
+        public void setImagem(String imagem) {
+            this.imagem = imagem;
+        } 
 }

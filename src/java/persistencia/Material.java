@@ -1,12 +1,14 @@
 package persistencia;
 
 import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity(name = "MATERIAL")
+@ManagedBean
 public class Material implements Serializable {
 
 	@Id

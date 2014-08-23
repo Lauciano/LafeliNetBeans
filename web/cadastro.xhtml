@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Home</title>
+        <link href="resources/css/bootstrap.css" rel="stylesheet" />
+        <link href="resources/css/simples-sidebar.css" rel="stylesheet" />
+    </h:head>
+
+    <h:body>
+        <f:view id="frmView">
+            <header class="page-header">
+                <h1 class="text-center">
+                    <strong>
+                        <img class="img-responsive" style="margin: 0 auto;" src="resources/img/lafeli.png" alt="LAFELI"/>
+                    </strong>
+                </h1>
+            </header>
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="index.xhtml">Home</a></li>
+                            <li><a href="produtos.xhtml">Produtos</a></li>
+                        </ul>
+                        <div>
+                            <h:form id="frmLogin" styleClass="navbar-form navbar-right">
+                                <h:outputText value="Olá, #{loginBean.username}" styleClass="navbar-text" rendered="#{loginBean.isLoggedIn}" />
+                                <h:commandButton action="#{loginBean.logoff}" value="Sair" styleClass="btn btn-default" rendered="#{loginBean.isLoggedIn}" />
+                                <h:inputText value="#{loginBean.username}" id="username" styleClass="form-control" rendered="#{loginBean.isNotLoggedIn}" />
+                                <h:inputSecret value="#{loginBean.password}" styleClass="form-control" rendered="#{loginBean.isNotLoggedIn}" />
+                                <h:commandButton action="#{loginBean.login}" value="Entrar" id="btnLogin" styleClass="btn btn-default" rendered="#{loginBean.isNotLoggedIn}" /> 
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            
+            <section>
+                <h:form styleClass="navbar" rendered="#{loginBean.isLoggedIn}" >
+                    <p:growl autoUpdate="true"/>
+
+                    <p:panelMenu styleClass="collapse navbar-collapse" >
+                        <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Cliente">
+                            <p:menuitem id="clientecd" actionListener="#{cadastro.setTipoCadastro}" value="Cadastrar" icon="ui-icon-disk" update=":formularios"/>
+                            <p:menuitem value="Remover" icon="ui-icon-closethick" />
+                            <p:menuitem value="Atualizar" icon="ui-icon-arrowrefresh-1-w" />
+                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
+                        </p:submenu>
+                        <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Venda">
+                            <p:menuitem id="vendacd" actionListener="#{cadastro.setTipoCadastro}" value="Cadastrar" icon="ui-icon-disk"  update=":formularios"/>
+                            <p:menuitem value="Remover" icon="ui-icon-closethick" />
+                            <p:menuitem value="Atualizar" icon="ui-icon-arrowrefresh-1-w" />
+                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
+                        </p:submenu>
+                        <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Produto">
+                            <p:menuitem id="produtocd" actionListener="#{cadastro.setTipoCadastro}" value="Cadastrar" icon="ui-icon-disk" update=":formularios"/>
+                            <p:menuitem value="Remover" icon="ui-icon-closethick" />
+                            <p:menuitem value="Atualizar" icon="ui-icon-arrowrefresh-1-w" />
+                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
+                        </p:submenu>
+                        <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Material">
+                            <p:menuitem id="materialcd" actionListener="#{cadastro.setTipoCadastro}" value="Cadastrar" icon="ui-icon-disk" update=":formularios"/>
+                            <p:menuitem value="Remover" icon="ui-icon-closethick" />
+                            <p:menuitem value="Atualizar" icon="ui-icon-arrowrefresh-1-w" />
+                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
+                        </p:submenu>
+                        <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Compra">
+                            <p:menuitem id="compracd" actionListener="#{cadastro.setTipoCadastro}" value="Cadastrar" icon="ui-icon-disk" update=":formularios"/>
+                            <p:menuitem value="Remover" icon="ui-icon-closethick" />
+                            <p:menuitem value="Atualizar" icon="ui-icon-arrowrefresh-1-w" />
+                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
+                        </p:submenu>
+                        <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Fornecedor">
+                            <p:menuitem id="fornecedorcd" actionListener="#{cadastro.setTipoCadastro}" value="Cadastrar" icon="ui-icon-disk"  update=":formularios"/>
+                            <p:menuitem value="Remover" icon="ui-icon-closethick" />
+                            <p:menuitem value="Atualizar" icon="ui-icon-arrowrefresh-1-w" />
+                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
+                        </p:submenu>
+                    </p:panelMenu>
+                </h:form>
+            </section>
+            
+            <!-- Cadastro de Cliente -->
+            <section>
+                <h:panelGroup id="formularios">
+                <h:form id="clienteform" styleClass="panel-body" rendered="#{cadastro.tipoCadastro == 1}">
+                    <p:growl id ="msgs" showDetail="true"/>
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel value="Nome:"/>
+                        <p:inputText/>
+                        
+                        <p:outputLabel value="Sobrenome:"/>
+                        <p:inputText/>
+                        
+                        <p:outputLabel value="Telefone:"/>
+                        <p:inputMask id="phone1" mask="(99) 9999-9999"/>
+                        
+                        <p:outputLabel value="Telefone Secundário:"/>
+                        <p:inputMask id="phone2" mask="(99) 9999-9999"/>
+                    </h:panelGrid>
+                    <p:button value="Cadastrar" icon="ui-icon-disk"/>
+                </h:form>
+
+               <!-- Cadastro de Venda -->
+               <h:form id="vendaform" styleClass="panel-body" rendered="#{cadastro.tipoCadastro == 2}">
+                    <p:growl id ="msgs" showDetail="true"/>
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel value="Id do comprador:"/>
+                        <p:inputText/>
+                        
+                        <p:outputLabel value="Id do produto:"/>
+                        <p:inputText/>
+                        
+                        <p:outputLabel value="Data da compra:"/>
+                        <p:calendar id="inline" value="#{calendarView.date1}"/>
+                        
+                        <p:outputLabel value="Quantidade:"/>
+                        <p:spinner id="minMax" value="#{spinnerView.number3}" min="0"/>
+                        
+                        <p:outputLabel value="Data de entrega:"/>
+                        <p:calendar id="inline2" value="#{calendarView.date2}"/>
+                    </h:panelGrid>
+                    <p:button value="Cadastrar" icon="ui-icon-disk"/>
+                </h:form>
+               
+                <h:form id="produtoform" styleClass="panel-body" rendered="#{cadastro.tipoCadastro == 3}">
+                    <p:growl id ="msgs" showDetail="true"/>
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel value="Nome:"/>
+                        <p:inputText/>
+                        
+                        <p:outputLabel value="Quantidade:"/>
+                       <p:spinner id="minMax1" value="#{spinnerView.number4}" min="0"/>
+                    </h:panelGrid>
+                    <p:button value="Cadastrar" icon="ui-icon-disk"/>
+                </h:form>
+                
+               <!-- Cadastro de Produto -->
+                <h:form id="materialform" styleClass="panel-body" rendered="#{cadastro.tipoCadastro == 4}">
+                    <p:growl id ="msgs" showDetail="true"/>
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel value="Nome:"/>
+                        <p:inputText/>
+                        
+                        <p:outputLabel value="Quantidade:"/>
+                        <p:inputText/>
+                    </h:panelGrid>
+                    <p:button value="Cadastrar" icon="ui-icon-disk"/>
+                </h:form>
+                
+               <!-- Cadastro de Compra -->
+                <h:form id="compraform" styleClass="panel-body" rendered="#{cadastro.tipoCadastro == 5}">
+                    <p:growl id ="msgs" showDetail="true"/>
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel value="Id do material:"/>
+                        <p:inputText/>
+                        
+                        <p:outputLabel value="Id do fornecedor:"/>
+                        <p:inputText/>
+                        
+                        <p:outputLabel value="Quantidade:"/>
+                        <p:spinner id="minMax1" value="#{spinnerView.number3}" min="0"/>
+                        
+                        <p:outputLabel value="Data:"/>
+                        <p:calendar id="inline" value="#{calendarView.date3}"/>
+                        
+                        <p:outputLabel value="Preço:"/>
+                        <p:inputText/>
+                        
+                    </h:panelGrid>
+                    <p:button value="Cadastrar" icon="ui-icon-disk"/>
+                </h:form>
+                
+                <h:form id="fornecedorform" styleClass="panel-body" rendered="#{cadastro.tipoCadastro == 6}">
+                    <p:growl id ="msgs" showDetail="true"/>
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel value="Nome:"/>
+                        <p:inputText/>
+                        
+                        <p:outputLabel value="Material:"/>
+                        <p:inputText/>
+                        
+                        <p:outputLabel value="Preço:"/>
+                        <p:inputText/>
+                        
+                    </h:panelGrid>
+                    <p:button value="Cadastrar" icon="ui-icon-disk"/>
+                </h:form>
+                </h:panelGroup>
+            </section>
+            <footer class="panel-footer">
+                <p>
+                    <strong>Contato</strong><br />
+                    lafelicadeiras@hotmail.com<br />
+                    (88) 9905-1699 - Tim<br />
+                    (88) 9272-8588 - Claro
+                </p>
+            </footer>
+        </f:view>
+    </h:body>
+</html>

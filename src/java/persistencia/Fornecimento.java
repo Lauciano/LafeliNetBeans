@@ -1,12 +1,14 @@
 package persistencia;
 
 import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity(name = "FORNECIMENTO")
+@ManagedBean
 public class Fornecimento implements Serializable {
 
 	@Id
@@ -16,6 +18,9 @@ public class Fornecimento implements Serializable {
 	
 	@Column(name="FORNECEDOR", nullable = false)
 	private Integer fornecedor;
+        
+        @Column(name="NOME", nullable = false)
+        private String nome;
 	
 	@Column(name="MATERIAL", nullable = false)
 	private Integer material;
@@ -26,6 +31,14 @@ public class Fornecimento implements Serializable {
 	public Fornecimento(){
 		
 	}
+        
+        public String getNome() {
+            return nome;
+        }
+
+        public void setNome(String nome) {
+            this.nome = nome;
+        }
 
 	public Integer getId() {
 		return id;
