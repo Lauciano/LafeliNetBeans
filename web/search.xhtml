@@ -65,8 +65,139 @@
                     </div>
                 </div>
                 <div class="panel-body">
+                    
                     <div id="formularios">
-                        <p:dataTable var="cliente" 
+                        <p><strong> Tabela Cliente </strong></p>
+                        <p:dataTable var="cliente" value="#{clienteView.clientes}">
+                            <p:column headerText="Id">
+                                <h:outputText value="#{cliente.id}" />
+                            </p:column>
+
+                            <p:column headerText="Nome">
+                                <h:outputText value="#{cliente.nome}" />
+                            </p:column>
+
+                            <p:column headerText="Sobrenome">
+                                <h:outputText value="#{cliente.sobrenome}" />
+                            </p:column>
+
+                            <p:column headerText="Telefone Primario">
+                                <h:outputText value="#{cliente.telefonep}" />
+                            </p:column>
+
+                            <p:column headerText="Telefone Secundario">
+                                <h:outputText value="#{cliente.telefones}" />
+                            </p:column>
+                        </p:dataTable>
+                        
+                        <br></br>
+                        <p><strong> Tabela Venda </strong></p>
+                        <p:dataTable var="venda" value="#{vendaView.vendas}">
+                            <p:column headerText="Id">
+                                <h:outputText value="#{venda.id}" />
+                            </p:column>
+
+                            <p:column headerText="Id do Comprador">
+                                <h:outputText value="#{venda.comprador}" />
+                            </p:column>
+
+                            <p:column headerText="Data da Compra">
+                                <h:outputText value="#{venda.dataDeCompra}" />
+                            </p:column>
+                            
+                            <p:column headerText="Data de Entrega">
+                                <h:outputText value="#{venda.dataEntrega}" />
+                            </p:column>
+                        </p:dataTable>
+                        
+                        <br></br>
+                        <p><strong> Tabela Produto </strong></p>
+                        <p:dataTable var="produto" value="#{produtoView.produtos}">
+                            <p:column headerText="Id">
+                                <h:outputText value="#{produto.id}" />
+                            </p:column>
+
+                            <p:column headerText="Nome">
+                                <h:outputText value="#{produto.nome}" />
+                            </p:column>
+
+                            <p:column headerText="Preço">
+                                <h:outputText value="#{produto.preco}" />
+                            </p:column>
+                        </p:dataTable>
+                        
+                        <br></br>
+                        <p><strong> Tabela Material </strong></p>
+                        <p:dataTable var="material" value="#{materialView.materiais}">
+                            <p:column headerText="Id">
+                                <h:outputText value="#{material.id}" />
+                            </p:column>
+
+                            <p:column headerText="Nome">
+                                <h:outputText value="#{material.nome}" />
+                            </p:column>
+
+                            <p:column headerText="Quantidade">
+                                <h:outputText value="#{material.quantidade}" />
+                            </p:column>
+                        </p:dataTable>
+                        
+                        <br></br>
+                        <p><strong> Tabela Compra </strong></p>
+                        <p:dataTable var="compra" value="#{compraView.compras}">
+                            <p:column headerText="Id">
+                                <h:outputText value="#{compra.id}" />
+                            </p:column>
+
+                            <p:column headerText="Id do Material">
+                                <h:outputText value="#{compra.id_material}" />
+                            </p:column>
+
+                            <p:column headerText="Fornecedor">
+                                <h:outputText value="#{compra.id_fornecedor}" />
+                            </p:column>
+                            
+                            <p:column headerText="Quantidade">
+                                <h:outputText value="#{compra.quantidade}" />
+                            </p:column>
+                            
+                            <p:column headerText="Data da Compra">
+                                <h:outputText value="#{compra.data}" />
+                            </p:column>
+                            
+                            <p:column headerText="Preço">
+                                <h:outputText value="#{compra.preco}" />
+                            </p:column>
+                        </p:dataTable>
+                        
+                        <br></br>
+                        <p><strong> Tabela Fornecedor </strong></p>
+                        <p:dataTable var="fornecedor" value="#{fornecedorView.fornecedores}">
+                            <p:column headerText="Id">
+                                <h:outputText value="#{fornecedor.id}" />
+                            </p:column>
+
+                            <p:column headerText="CNPJ">
+                                <h:outputText value="#{fornecedor.cnpj}" />
+                            </p:column>
+
+                            <p:column headerText="Nome">
+                                <h:outputText value="#{fornecedor.nome}" />
+                            </p:column>
+                            
+                            <p:column headerText="Telefone Principal">
+                                <h:outputText value="#{fornecedor.telefonep}" />
+                            </p:column>
+                            
+                            <p:column headerText="Telefone Secundario">
+                                <h:outputText value="#{fornecedor.telefones}" />
+                            </p:column>
+                            
+                            <p:column headerText="Endereço">
+                                <h:outputText value="#{fornecedor.endereco}" />
+                            </p:column>
+                           
+                        </p:dataTable>
                     </div>
                 </div>
             </section>
