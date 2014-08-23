@@ -26,7 +26,7 @@ public class LoginBean implements Serializable {
     public String login() {
         //custom member manager class  
         MemberManager memberManager = new MemberManager();
-        FacesContext.getCurrentInstance().addMessage("frmLogin:btnLogin", new FacesMessage(username + " " + password));
+        System.out.println(username + " " + password);
 
         //user a custom method to authenticate a user  
         if (memberManager.authenticate(username, password)) {
@@ -36,7 +36,7 @@ public class LoginBean implements Serializable {
             //set the message to display when authentication fails  
             FacesContext.getCurrentInstance().addMessage("frmLogin:btnLogin", new FacesMessage("Invalid Username and or Password"));
         }
-        return "#";
+        return "faces/index";
     }
 
     /**
@@ -47,7 +47,7 @@ public class LoginBean implements Serializable {
      */
     public void verifyUseLogin(ComponentSystemEvent event) {
         if (!isLoggedIn) {
-            doRedirect("#");
+            doRedirect("faces/index");
         }
     }
 
@@ -59,7 +59,7 @@ public class LoginBean implements Serializable {
     private void doRedirect(String url) {
         try {
             FacesContext context = FacesContext.getCurrentInstance();
-            context.getExternalContext().redirect("#");
+            context.getExternalContext().redirect("faces/index");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -92,5 +92,13 @@ public class LoginBean implements Serializable {
 
     public void setIsLoggedIn(boolean isLoggedIn) {
         this.isLoggedIn = isLoggedIn;
+    }
+    
+    public boolean getIsNotLoggedIn() {
+        return !isLoggedIn;
+    }
+
+    public void setIsNotLoggedIn(boolean isNotLoggedIn) {
+        //Do NOTHING
     }
 }
