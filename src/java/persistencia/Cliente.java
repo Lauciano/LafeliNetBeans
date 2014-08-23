@@ -75,5 +75,30 @@ public class Cliente implements Serializable {
 	public void setTelefones(String telefones) {
 		this.telefones = telefones;
 	}
+        
+        public void cadastra(){
+            
+            Cliente c = new Cliente();
+            
+            System.out.println("Cadastrando");
+            
+            c.setNome(nome);
+            c.setSobrenome(sobrenome);
+            c.setTelefonep(telefonep);
+            c.setTelefones(telefones);
+
+            ClienteDAO cdao = new ClienteDAO();
+
+            cdao.persist(c);
+            limpaValores();
+            
+        }
+        
+        public void limpaValores(){
+            nome = "";
+            sobrenome = "";
+            telefonep = "";
+            telefones = "";
+        }
 
 }

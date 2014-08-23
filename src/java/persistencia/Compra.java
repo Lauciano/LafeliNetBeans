@@ -1,6 +1,8 @@
 package persistencia;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,6 +33,8 @@ public class Compra implements Serializable {
 	@Column(name="PRECO", nullable = false)
 	private Double preco;
 	
+        private Date d;
+        
 	public Compra(){
 	}
 
@@ -81,5 +85,42 @@ public class Compra implements Serializable {
 	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
+
+        public Date getD() {
+            return d;
+        }
+
+        public void setD(Date d) {
+            this.d = d;
+        }
+        
+        public void cadastra(){
+            
+            Compra p = new Compra();
+            
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            
+            System.out.println("Cadastrando");
+            
+            p.setId_fornecedor(id_fornecedor);
+            p.setId_material(id_material);
+            p.setPreco(preco);
+            p.setQuantidade(quantidade);
+            p.setData(format.format(d));
+            
+            CompraDAO cdao = new CompraDAO();
+
+            cdao.persist(p);
+            limpaValores();
+            
+        }
+        
+        public void limpaValores(){
+            id_fornecedor = 0;
+            id_material = 0;
+            preco = 0.0;
+            quantidade = 0;
+            d = new Date();
+        }
 	
 }

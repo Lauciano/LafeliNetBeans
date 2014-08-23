@@ -1,12 +1,14 @@
 package persistencia;
 
 import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity(name = "FORNECEDOR")
+@ManagedBean
 public class Fornecedor implements Serializable {
 
 	@Id
@@ -26,7 +28,7 @@ public class Fornecedor implements Serializable {
 	@Column(name="TELEFONE_S", nullable = true)
 	private String telefones;
 	
-	@Column(name="ENDEREDO", nullable = true)
+	@Column(name="ENDERECO", nullable = true)
 	private String endereco;
 	
 	public Fornecedor(){
@@ -81,5 +83,30 @@ public class Fornecedor implements Serializable {
 		this.endereco = endereco;
 	}
 	
-	
+	public void cadastra(){
+            
+            Fornecedor f = new Fornecedor();
+            
+            System.out.println("Cadastrando");
+            
+            f.setCnpj(cnpj);
+            f.setEndereco(endereco);
+            f.setNome(nome);
+            f.setTelefonep(telefonep);
+            f.setTelefones(telefones);
+
+            FornecedorDAO cdao = new FornecedorDAO();
+
+            cdao.persist(f);
+            limpaValores();
+            
+        }
+        
+        public void limpaValores(){
+            cnpj = "";
+            endereco = "";
+            nome = "";
+            telefonep = "";
+            telefones = "";
+        }
 }

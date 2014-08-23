@@ -91,18 +91,18 @@
                     <p:growl id ="msgs" showDetail="true"/>
                     <h:panelGrid columns="2" cellpadding="5">
                         <p:outputLabel value="Nome:"/>
-                        <p:inputText/>
+                        <p:inputText value="#{cliente.nome}"/>
                         
                         <p:outputLabel value="Sobrenome:"/>
-                        <p:inputText/>
+                        <p:inputText value="#{cliente.sobrenome}"/>
                         
                         <p:outputLabel value="Telefone:"/>
-                        <p:inputMask id="phone1" mask="(99) 9999-9999"/>
+                        <p:inputMask id="phone1" value="#{cliente.telefonep}" mask="(99) 9999-9999"/>
                         
                         <p:outputLabel value="Telefone Secundário:"/>
-                        <p:inputMask id="phone2" mask="(99) 9999-9999"/>
+                        <p:inputMask id="phone2" value="#{cliente.telefones}" mask="(99) 9999-9999"/>
                     </h:panelGrid>
-                    <p:button value="Cadastrar" icon="ui-icon-disk"/>
+                    <p:commandButton value="Cadastrar" action="#{cliente.cadastra()}" update=":formularios" icon="ui-icon-disk"/>
                 </h:form>
 
                <!-- Cadastro de Venda -->
@@ -110,46 +110,46 @@
                     <p:growl id ="msgs" showDetail="true"/>
                     <h:panelGrid columns="2" cellpadding="5">
                         <p:outputLabel value="Id do comprador:"/>
-                        <p:inputText/>
+                        <p:inputText value="#{venda.comprador}"/>
                         
                         <p:outputLabel value="Id do produto:"/>
-                        <p:inputText/>
+                        <p:inputText value="#{venda.produto}"/>
                         
                         <p:outputLabel value="Data da compra:"/>
-                        <p:calendar id="inline" value="#{calendarView.date1}"/>
+                        <p:calendar value="#{venda.d2}"/>
                         
                         <p:outputLabel value="Quantidade:"/>
-                        <p:spinner id="minMax" value="#{spinnerView.number3}" min="0"/>
+                        <p:spinner id="minMax" value="#{venda.quantidade}" min="0"/>
                         
                         <p:outputLabel value="Data de entrega:"/>
-                        <p:calendar id="inline2" value="#{calendarView.date2}"/>
+                        <p:calendar value="#{venda.d1}"/>
                     </h:panelGrid>
-                    <p:button value="Cadastrar" icon="ui-icon-disk"/>
+                    <p:commandButton value="Cadastrar" action="#{venda.cadastra()}" update=":formularios" icon="ui-icon-disk"/>
                 </h:form>
                
                 <h:form id="produtoform" styleClass="panel-body" rendered="#{cadastro.tipoCadastro == 3}">
                     <p:growl id ="msgs" showDetail="true"/>
                     <h:panelGrid columns="2" cellpadding="5">
                         <p:outputLabel value="Nome:"/>
-                        <p:inputText/>
+                        <p:inputText value="#{produto.nome}"/>
                         
                         <p:outputLabel value="Quantidade:"/>
-                       <p:spinner id="minMax1" value="#{spinnerView.number4}" min="0"/>
+                        <p:inputText id="minMax1" value="#{produto.preco}"/>
                     </h:panelGrid>
-                    <p:button value="Cadastrar" icon="ui-icon-disk"/>
+                    <p:commandButton value="Cadastrar" action="#{produto.cadastra()}" update=":formularios" icon="ui-icon-disk"/>
                 </h:form>
                 
-               <!-- Cadastro de Produto -->
+               <!-- Cadastro de Material -->
                 <h:form id="materialform" styleClass="panel-body" rendered="#{cadastro.tipoCadastro == 4}">
                     <p:growl id ="msgs" showDetail="true"/>
                     <h:panelGrid columns="2" cellpadding="5">
                         <p:outputLabel value="Nome:"/>
-                        <p:inputText/>
+                        <p:inputText value="#{material.nome}"/>
                         
                         <p:outputLabel value="Quantidade:"/>
-                        <p:inputText/>
+                        <p:spinner value="#{material.quantidade}" min="0"/>
                     </h:panelGrid>
-                    <p:button value="Cadastrar" icon="ui-icon-disk"/>
+                    <p:commandButton value="Cadastrar" action="#{material.cadastra()}" update=":formularios" icon="ui-icon-disk"/>
                 </h:form>
                 
                <!-- Cadastro de Compra -->
@@ -157,38 +157,44 @@
                     <p:growl id ="msgs" showDetail="true"/>
                     <h:panelGrid columns="2" cellpadding="5">
                         <p:outputLabel value="Id do material:"/>
-                        <p:inputText/>
+                        <p:inputText value="#{compra.id_material}"/>
                         
                         <p:outputLabel value="Id do fornecedor:"/>
-                        <p:inputText/>
+                        <p:inputText value="#{compra.id_fornecedor}"/>
                         
                         <p:outputLabel value="Quantidade:"/>
-                        <p:spinner id="minMax1" value="#{spinnerView.number3}" min="0"/>
+                        <p:spinner id="minMax1" value="#{compra.quantidade}" min="0"/>
                         
                         <p:outputLabel value="Data:"/>
-                        <p:calendar id="inline" value="#{calendarView.date3}"/>
+                        <p:calendar id="inline" value="#{compra.d}"/>
                         
                         <p:outputLabel value="Preço:"/>
-                        <p:inputText/>
+                        <p:inputText value="#{compra.preco}"/>
                         
                     </h:panelGrid>
-                    <p:button value="Cadastrar" icon="ui-icon-disk"/>
+                    <p:commandButton value="Cadastrar" action="#{compra.cadastra()}" update=":formularios" icon="ui-icon-disk"/>
                 </h:form>
                 
                 <h:form id="fornecedorform" styleClass="panel-body" rendered="#{cadastro.tipoCadastro == 6}">
                     <p:growl id ="msgs" showDetail="true"/>
                     <h:panelGrid columns="2" cellpadding="5">
                         <p:outputLabel value="Nome:"/>
-                        <p:inputText/>
+                        <p:inputText value="#{fornecedor.nome}"/>
                         
-                        <p:outputLabel value="Material:"/>
-                        <p:inputText/>
+                        <p:outputLabel value="CNPJ:"/>
+                        <p:inputText value="#{fornecedor.cnpj}"/>
                         
-                        <p:outputLabel value="Preço:"/>
-                        <p:inputText/>
+                        <p:outputLabel value="Telefone Primário:"/>
+                        <p:inputMask value="#{fornecedor.telefonep}" mask="(99) 9999-9999"/>
+                        
+                        <p:outputLabel value="Telefone Secundário:"/>
+                        <p:inputMask value="#{fornecedor.telefones}"  mask="(99) 9999-9999"/>
+                        
+                        <p:outputLabel value="Endereço:"/>
+                        <p:inputText value="#{fornecedor.endereco}"/>
                         
                     </h:panelGrid>
-                    <p:button value="Cadastrar" icon="ui-icon-disk"/>
+                    <p:commandButton value="Cadastrar" action="#{fornecedor.cadastra()}" update=":formularios" icon="ui-icon-disk"/>
                 </h:form>
                 </h:panelGroup>
             </section>

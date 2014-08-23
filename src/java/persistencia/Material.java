@@ -50,5 +50,24 @@ public class Material implements Serializable {
 		this.quantidade = quantidade;
 	}
 	
-	
+	public void cadastra(){
+            
+            Material m = new Material();
+            
+            System.out.println("Cadastrando");
+            
+            m.setNome(nome);
+            m.setQuantidade(quantidade);
+
+            MaterialDAO cdao = new MaterialDAO();
+
+            cdao.persist(m);
+            limpaValores();
+            
+        }
+        
+        public void limpaValores(){
+            nome = "";
+            quantidade = 0;
+        }
 }

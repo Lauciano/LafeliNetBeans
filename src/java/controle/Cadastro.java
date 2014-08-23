@@ -10,6 +10,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import persistencia.Cliente;
+import persistencia.ClienteDAO;
 
 /**
  *
@@ -36,8 +38,6 @@ public class Cadastro {
         else if(nome.equals("fornecedorcd")) tipoCadastro = 6;
         else tipoCadastro = 4;
         
-        System.out.println("Tipo = " + tipoCadastro);
-        
         return "cadastro";
         
     }
@@ -47,14 +47,11 @@ public class Cadastro {
     }
 
     public int getTipoCadastro() {
-        System.out.println("Pegando valor " + tipoCadastro);
         return tipoCadastro;
     }
 
     public void setTipoCadastro(int tipoCadastro) {
         this.tipoCadastro = tipoCadastro;
     }
-    
-    
     
 }

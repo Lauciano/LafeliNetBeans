@@ -22,10 +22,9 @@ public class Produto implements Serializable {
 	@Column(name="PRECO", nullable = false)
 	private Double preco;
 	
-	@Column(name="IMAGEM", nullable = false)
-	private String imagem;
-	
 	public Produto(){
+            nome = "";
+            preco = 0.0;
 	}
 
 	public Integer getId() {
@@ -55,12 +54,26 @@ public class Produto implements Serializable {
         public void setPreco(Double preco) {
             this.preco = preco;
         }
+        
+        public void cadastra(){
+            
+            Produto p = new Produto();
+            
+            System.out.println("Cadastrando");
+            
+            p.setNome(nome);
+            p.setPreco(preco);
 
-        public String getImagem() {
-            return imagem;
+            ProdutoDAO cdao = new ProdutoDAO();
+
+            cdao.persist(p);
+            limpaValores();
+            
         }
-
-        public void setImagem(String imagem) {
-            this.imagem = imagem;
-        } 
+        
+        public void limpaValores(){
+            nome = "";
+            preco = 0.0;
+        }
+        
 }
