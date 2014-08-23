@@ -2,14 +2,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Home</title>
         <link href="resources/css/bootstrap.css" rel="stylesheet" />
+        <link href="resources/css/simples-sidebar.css" rel="stylesheet" />
     </h:head>
 
     <h:body>
-        <f:view>
+        <f:view id="frmView">
             <header class="page-header">
                 <h1 class="text-center">
                     <strong>
@@ -19,29 +21,77 @@
             </header>
             <nav class="navbar navbar-default" role="navigation">
                 <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->				
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="#">Home</a></li>
-                            <li><a href="#">Produtos</a></li>
+                            <li class="active"><a href="index.xhtml">Home</a></li>
+                            <li><a href="produtos.xhtml">Produtos</a></li>
                         </ul>
                         <div>
                             <h:form id="frmLogin" styleClass="navbar-form navbar-right">
-                                <h:outputText value="(Olá, ).#{loginBean.username}" styleClass="navbar-text" rendered="#{loginBean.isLoggedIn}" />
-                                <h:outputLink id="link1" value="faces/index" rendered="#{loginBean.isLoggedIn}" >
-                                    <h:outputText value="Sair" styleClass="navbar-text" />
-                                </h:outputLink>
-                                <h:inputText value="#{loginBean.username}" styleClass="form-control" rendered="#{loginBean.isNotLoggedIn}" />
+                                <h:outputText value="Olá, #{loginBean.username}" styleClass="navbar-text" rendered="#{loginBean.isLoggedIn}" />
+                                <h:commandButton action="#{loginBean.logoff}" value="Sair" styleClass="btn btn-default" rendered="#{loginBean.isLoggedIn}" />
+                                <h:inputText value="#{loginBean.username}" id="username" styleClass="form-control" rendered="#{loginBean.isNotLoggedIn}" />
                                 <h:inputSecret value="#{loginBean.password}" styleClass="form-control" rendered="#{loginBean.isNotLoggedIn}" />
                                 <h:commandButton action="#{loginBean.login}" value="Entrar" id="btnLogin" styleClass="btn btn-default" rendered="#{loginBean.isNotLoggedIn}" /> 
                             </h:form>
                         </div>
-                    </div><!-- /.navbar-collapse -->
-                </div><!-- /.container-fluid -->
+                    </div>
+                </div>
             </nav>
-            <section class="panel panel-default">
-                <img class="img-responsive" style="margin: 0 auto;" src="resources/img/home.jpg" alt="Conjunto de Cadeiras Paradas"/>
+            
+            <section class="navbar">
+                <h:form styleClass="container-fluid" rendered="#{loginBean.isLoggedIn}" >
+                    <p:growl autoUpdate="true"/>
+
+                    <p:panelMenu styleClass="collapse navbar-collapse" >
+                        <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Cliente">
+                            <p:menuitem value="Cadastrar" icon="ui-icon-disk" />
+                            <p:menuitem value="Remover" icon="ui-icon-closethick" />
+                            <p:menuitem value="Atualizar" icon="ui-icon-arrowrefresh-1-w" />
+                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
+                        </p:submenu>
+                        <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Venda">
+                            <p:menuitem value="Cadastrar" icon="ui-icon-disk" />
+                            <p:menuitem value="Remover" icon="ui-icon-closethick" />
+                            <p:menuitem value="Atualizar" icon="ui-icon-arrowrefresh-1-w" />
+                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
+                        </p:submenu>
+                        <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Produto">
+                            <p:menuitem value="Cadastrar" icon="ui-icon-disk" />
+                            <p:menuitem value="Remover" icon="ui-icon-closethick" />
+                            <p:menuitem value="Atualizar" icon="ui-icon-arrowrefresh-1-w" />
+                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
+                        </p:submenu>
+                        <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Material">
+                            <p:menuitem value="Cadastrar" icon="ui-icon-disk" />
+                            <p:menuitem value="Remover" icon="ui-icon-closethick" />
+                            <p:menuitem value="Atualizar" icon="ui-icon-arrowrefresh-1-w" />
+                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
+                        </p:submenu>
+                        <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Produto">
+                            <p:menuitem value="Cadastrar" icon="ui-icon-disk" />
+                            <p:menuitem value="Remover" icon="ui-icon-closethick" />
+                            <p:menuitem value="Atualizar" icon="ui-icon-arrowrefresh-1-w" />
+                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
+                        </p:submenu>
+                        <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Fornecedor">
+                            <p:menuitem value="Cadastrar" icon="ui-icon-disk" />
+                            <p:menuitem value="Remover" icon="ui-icon-closethick" />
+                            <p:menuitem value="Atualizar" icon="ui-icon-arrowrefresh-1-w" />
+                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
+                        </p:submenu>
+                    </p:panelMenu>
+                </h:form>
+            </section>
+            
+            <section id="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <img class="img-responsive" style="margin: 0 auto;" src="resources/img/home.jpg" alt="Conjunto de Cadeiras Paradas"/>
+                        </div>
+                    </div>
+                </div>
             </section>
             <footer class="panel-footer">
                 <p>

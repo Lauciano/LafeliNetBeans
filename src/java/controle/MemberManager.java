@@ -12,7 +12,7 @@ public class MemberManager {
 	}
 
 	public boolean authenticate(String username, String password){
-		if(username == user && password == pswd){
+		if(username.equals(user) && password.equals(pswd)){
 			return true;
 		}
 		return false;

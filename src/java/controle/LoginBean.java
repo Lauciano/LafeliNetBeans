@@ -26,7 +26,7 @@ public class LoginBean implements Serializable {
     public String login() {
         //custom member manager class  
         MemberManager memberManager = new MemberManager();
-        System.out.println(username + " " + password);
+        System.out.println(username + " " + password + " " + isLoggedIn);
 
         //user a custom method to authenticate a user  
         if (memberManager.authenticate(username, password)) {
@@ -34,11 +34,18 @@ public class LoginBean implements Serializable {
             isLoggedIn = true;
         } else {
             //set the message to display when authentication fails  
-            FacesContext.getCurrentInstance().addMessage("frmLogin:btnLogin", new FacesMessage("Invalid Username and or Password"));
+            FacesContext.getCurrentInstance().addMessage("frmView:frmLogin:btnLogin", new FacesMessage("Nome de Usuário ou Senha Inválidos"));
         }
         return "faces/index";
     }
 
+    public String logoff() {
+        username = "Nome de Usuário";
+        password = "Senha";
+        isLoggedIn = false;
+        return "faces/index";
+    }
+    
     /**
      * An event listener for redirecting the user to login page if he/she is not
      * currently logged in
@@ -69,6 +76,9 @@ public class LoginBean implements Serializable {
         return login();
     }
     
+    public String getLogoff() {
+        return logoff();
+    }
     
     public String getUsername() {
         return username;
