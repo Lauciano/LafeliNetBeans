@@ -36,14 +36,14 @@ public class LoginBean implements Serializable {
             //set the message to display when authentication fails  
             FacesContext.getCurrentInstance().addMessage("frmView:frmLogin:btnLogin", new FacesMessage("Nome de Usuário ou Senha Inválidos"));
         }
-        return "faces/index";
+        return "index";
     }
 
     public String logoff() {
         username = "Nome de Usuário";
         password = "Senha";
         isLoggedIn = false;
-        return "index.xhtml";
+        return "index";
     }
     
     /**
@@ -54,7 +54,7 @@ public class LoginBean implements Serializable {
      */
     public void verifyUseLogin(ComponentSystemEvent event) {
         if (!isLoggedIn) {
-            doRedirect("faces/index");
+            doRedirect("index");
         }
     }
 
@@ -66,7 +66,7 @@ public class LoginBean implements Serializable {
     private void doRedirect(String url) {
         try {
             FacesContext context = FacesContext.getCurrentInstance();
-            context.getExternalContext().redirect("faces/index");
+            context.getExternalContext().redirect("index");
         } catch (IOException e) {
             e.printStackTrace();
         }
