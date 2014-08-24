@@ -83,7 +83,7 @@
             
             <!-- Cadastro de Cliente -->
             <section>
-                <h:panelGroup id="formularios">
+                <h:panelGroup id="formularios" rendered="#{loginBean.isLoggedIn}">
                 <h:form id="clienteform" styleClass="panel-body" rendered="#{cadastro.tipoCadastro == 1}">
                     <p:growl id ="msgs" showDetail="true"/>
                     <h:panelGrid columns="2" cellpadding="5">
@@ -197,8 +197,8 @@
                 </h:form>
                 </h:panelGroup>
             </section>
+            
             <footer class="panel-footer">
-                <footer class="panel-footer">
                 <p>
                     <strong>Contato</strong><br />
                     xxxxx@xxxxx.xxx.xx<br />
@@ -208,7 +208,6 @@
                     (88) 9905-1699 - Tim<br />
                     (88) 9272-8588 - Claro -->
                 </p>
-            </footer>
             </footer>
         </f:view>
     </h:body>
