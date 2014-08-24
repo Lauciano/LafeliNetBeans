@@ -27,13 +27,13 @@
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav">
                             <li>
-                                <a href="index.xhtml">Home</a>
+                                <a href="index.jsf">Home</a>
                             </li>
                             <li class="active">
                                 <p:link value="Cadastro" href="#" rendered="#{loginBean.isLoggedIn}" />
                             </li>
                             <li>
-                                <p:link value="Consulta" href="search.xhtml" rendered="#{loginBean.isLoggedIn}" />
+                                <p:link value="Consulta" href="search.jsf" rendered="#{loginBean.isLoggedIn}" />
                             </li>
                         </ul>
                         <div>
@@ -55,27 +55,27 @@
                     <p:panelMenu styleClass="collapse navbar-collapse" >
                         <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Cliente">
                             <p:menuitem id="clientecd" actionListener="#{cadastro.setTipoCadastro}" value="Cadastrar" icon="ui-icon-disk" update=":formularios"/>
-                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
+                            <p:menuitem value="Pesquisar" actionListener="#{buscador.buscarCliente}" icon="ui-icon-search" />
                         </p:submenu>
                         <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Venda">
                             <p:menuitem id="vendacd" actionListener="#{cadastro.setTipoCadastro}" value="Cadastrar" icon="ui-icon-disk"  update=":formularios"/>
-                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
+                            <p:menuitem value="Pesquisar" actionListener="#{buscador.buscarVenda}" icon="ui-icon-search" />
                         </p:submenu>
                         <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Produto">
                             <p:menuitem id="produtocd" actionListener="#{cadastro.setTipoCadastro}" value="Cadastrar" icon="ui-icon-disk" update=":formularios"/>
-                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
+                            <p:menuitem value="Pesquisar" actionListener="#{buscador.buscarProduto}" icon="ui-icon-search" />
                         </p:submenu>
                         <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Material">
                             <p:menuitem id="materialcd" actionListener="#{cadastro.setTipoCadastro}" value="Cadastrar" icon="ui-icon-disk" update=":formularios"/>
-                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
+                            <p:menuitem value="Pesquisar" actionListener="#{buscador.buscarMaterial}" icon="ui-icon-search" />
                         </p:submenu>
                         <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Compra">
                             <p:menuitem id="compracd" actionListener="#{cadastro.setTipoCadastro}" value="Cadastrar" icon="ui-icon-disk" update=":formularios"/>
-                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
+                            <p:menuitem value="Pesquisar" actionListener="#{buscador.buscarCompra}" icon="ui-icon-search" />
                         </p:submenu>
                         <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Fornecedor">
                             <p:menuitem id="fornecedorcd" actionListener="#{cadastro.setTipoCadastro}" value="Cadastrar" icon="ui-icon-disk"  update=":formularios"/>
-                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
+                            <p:menuitem value="Pesquisar" actionListener="#{buscador.buscarFornecedor}" icon="ui-icon-search" />
                         </p:submenu>
                     </p:panelMenu>
                 </h:form>
@@ -124,13 +124,14 @@
                     <p:commandButton value="Cadastrar" action="#{venda.cadastra()}" update=":formularios" icon="ui-icon-disk"/>
                 </h:form>
                
+               <!-- Cadastro de Produto -->
                 <h:form id="produtoform" styleClass="panel-body" rendered="#{cadastro.tipoCadastro == 3}">
                     <p:growl id ="msgs" showDetail="true"/>
                     <h:panelGrid columns="2" cellpadding="5">
                         <p:outputLabel value="Nome:"/>
                         <p:inputText value="#{produto.nome}"/>
                         
-                        <p:outputLabel value="Quantidade:"/>
+                        <p:outputLabel value="Preço:"/>
                         <p:inputText id="minMax1" value="#{produto.preco}"/>
                     </h:panelGrid>
                     <p:commandButton value="Cadastrar" action="#{produto.cadastra()}" update=":formularios" icon="ui-icon-disk"/>
@@ -172,6 +173,7 @@
                     <p:commandButton value="Cadastrar" action="#{compra.cadastra()}" update=":formularios" icon="ui-icon-disk"/>
                 </h:form>
                 
+               <!-- Cadastro de Fornecedor -->
                 <h:form id="fornecedorform" styleClass="panel-body" rendered="#{cadastro.tipoCadastro == 6}">
                     <p:growl id ="msgs" showDetail="true"/>
                     <h:panelGrid columns="2" cellpadding="5">
@@ -196,12 +198,17 @@
                 </h:panelGroup>
             </section>
             <footer class="panel-footer">
+                <footer class="panel-footer">
                 <p>
                     <strong>Contato</strong><br />
-                    lafelicadeiras@hotmail.com<br />
+                    xxxxx@xxxxx.xxx.xx<br />
+                    (XX) XXXX-XXXX <br />
+                    (XX) XXXX-XXXX <br />
+                    <!-- lafelicadeiras@hotmail.com<br />
                     (88) 9905-1699 - Tim<br />
-                    (88) 9272-8588 - Claro
+                    (88) 9272-8588 - Claro -->
                 </p>
+            </footer>
             </footer>
         </f:view>
     </h:body>

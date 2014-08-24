@@ -46,6 +46,48 @@ public class Buscador {
         return "search";
     }
     
+    public String buscarCliente() {
+        System.err.println("Pegando Cliente");
+        tipo = "Cliente";
+        tipoView = 1;
+        return "search";
+    }
+    
+    public String buscarVenda() {
+        System.err.println("Pegando Venda");
+        tipo = "Venda";
+        tipoView = 2;
+        return "search";
+    }
+    
+    public String buscarProduto() {
+        System.err.println("Pegando Produto");
+        tipo = "Produto";
+        tipoView = 3;
+        return "search";
+    }
+    
+    public String buscarMaterial() {
+        System.err.println("Pegando Material");
+        tipo = "Material";
+        tipoView = 4;
+        return "search";
+    }
+    
+    public String buscarCompra() {
+        System.err.println("Pegando Compra");
+        tipo = "Compra";
+        tipoView = 5;
+        return "search";
+    }
+    
+    public String buscarFornecedor() {
+        System.err.println("Pegando Fornecedor");
+        tipo = "Fornecedor";
+        tipoView = 6;
+        return "search";
+    }
+    
     public String getTipo(){
         return tipo;
     }
