@@ -52,23 +52,24 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-offset-5">
-                            <p:selectOneMenu value="#{buscador.tipo}" style="width:35%" rendered="#{loginBean.isLoggedIn}">
-                                <f:selectItems value="#{buscador.lista}" />
-                            </p:selectOneMenu>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-offset-5">
-                            <h:inputText value="#{buscador.texto}" style="width:25%" rendered="#{loginBean.isLoggedIn}" />
-                            <h:commandButton action="#{buscador.buscar}" value="Entrar" style="width:10%" id="btnSearch" rendered="#{loginBean.isLoggedIn}"/>
+                            <h:form>
+                                <p:selectOneMenu id="dropdown1" value="#{buscador.texto}" style="width:35%" rendered="#{loginBean.isLoggedIn}">
+                                    <f:selectItem itemValue="Cliente" itemLabel="Cliente" />
+                                    <f:selectItem itemValue="Venda" itemLabel="Venda" />
+                                    <f:selectItem itemValue="Produto" itemLabel="Produto" />
+                                    <f:selectItem itemValue="Fornecedor" itemLabel="Fornecedor" />
+                                    <f:selectItem itemValue="Compra" itemLabel="Compra" />
+                                    <f:selectItem itemValue="Material" itemLabel="Material" />
+                                </p:selectOneMenu>
+                                <h:commandButton action="#{buscador.buscar()}" value="Buscar" style="width:10%" id="btnSearch" rendered="#{loginBean.isLoggedIn}"/>
+                            </h:form>
                         </div>
                     </div>
                 </div>
                 <div class="panel-body">
                     
                     <div id="formularios">
-                        <p><strong> Tabela Cliente </strong></p>
-                        <p:dataTable var="cliente" value="#{clienteView.clientes}">
+                        <p:dataTable var="cliente" value="#{clienteView.clientes}" rendered="#{buscador.tipoView == 1}">
                             <p:column headerText="Id">
                                 <h:outputText value="#{cliente.id}" />
                             </p:column>
@@ -90,9 +91,7 @@
                             </p:column>
                         </p:dataTable>
                         
-                        <br></br>
-                        <p><strong> Tabela Venda </strong></p>
-                        <p:dataTable var="venda" value="#{vendaView.vendas}">
+                        <p:dataTable var="venda" value="#{vendaView.vendas}" rendered="#{buscador.tipoView == 2}">
                             <p:column headerText="Id">
                                 <h:outputText value="#{venda.id}" />
                             </p:column>
@@ -110,9 +109,7 @@
                             </p:column>
                         </p:dataTable>
                         
-                        <br></br>
-                        <p><strong> Tabela Produto </strong></p>
-                        <p:dataTable var="produto" value="#{produtoView.produtos}">
+                        <p:dataTable var="produto" value="#{produtoView.produtos}" rendered="#{buscador.tipoView == 3}">
                             <p:column headerText="Id">
                                 <h:outputText value="#{produto.id}" />
                             </p:column>
@@ -126,9 +123,7 @@
                             </p:column>
                         </p:dataTable>
                         
-                        <br></br>
-                        <p><strong> Tabela Material </strong></p>
-                        <p:dataTable var="material" value="#{materialView.materiais}">
+                        <p:dataTable var="material" value="#{materialView.materiais}" rendered="#{buscador.tipoView == 4}">
                             <p:column headerText="Id">
                                 <h:outputText value="#{material.id}" />
                             </p:column>
@@ -142,9 +137,7 @@
                             </p:column>
                         </p:dataTable>
                         
-                        <br></br>
-                        <p><strong> Tabela Compra </strong></p>
-                        <p:dataTable var="compra" value="#{compraView.compras}">
+                        <p:dataTable var="compra" value="#{compraView.compras}" rendered="#{buscador.tipoView == 5}">
                             <p:column headerText="Id">
                                 <h:outputText value="#{compra.id}" />
                             </p:column>
@@ -170,9 +163,7 @@
                             </p:column>
                         </p:dataTable>
                         
-                        <br></br>
-                        <p><strong> Tabela Fornecedor </strong></p>
-                        <p:dataTable var="fornecedor" value="#{fornecedorView.fornecedores}">
+                        <p:dataTable var="fornecedor" value="#{fornecedorView.fornecedores}" rendered="#{buscador.tipoView == 6}">
                             <p:column headerText="Id">
                                 <h:outputText value="#{fornecedor.id}" />
                             </p:column>
@@ -199,6 +190,49 @@
                            
                         </p:dataTable>
                     </div>
+                    
+                    <h:form rendered="#{buscador.tipoView == 1}">
+                        <h:outputLabel value="Deletar linha:"/>
+                        <h:inputText value="#{deleteUpdate.id}"/>
+                        <h:commandButton value="Deletar" action="#{deleteUpdate.deleteCliente()}"/>
+                        <h:commandButton value="Atualizar" action="#{deleteUpdate.updateCliente()}"/>
+                    </h:form>
+                    
+                    <h:form rendered="#{buscador.tipoView == 2}">
+                        <h:outputLabel value="Deletar linha:"/>
+                        <h:inputText value="#{deleteUpdate.id}"/>
+                        <h:commandButton value="Deletar" action="#{deleteUpdate.deleteVenda()}"/>
+                        <h:commandButton value="Atualizar" action="#{deleteUpdate.updateVenda()}"/>
+                    </h:form>
+                    
+                    <h:form rendered="#{buscador.tipoView == 3}">
+                        <h:outputLabel value="Deletar linha:"/>
+                        <h:inputText value="#{deleteUpdate.id}"/>
+                        <h:commandButton value="Deletar" action="#{deleteUpdate.deleteProduto()}"/>
+                        <h:commandButton value="Atualizar" action="#{deleteUpdate.updateProduto()}"/>
+                    </h:form>
+                    
+                    <h:form rendered="#{buscador.tipoView == 4}">
+                        <h:outputLabel value="Deletar linha:"/>
+                        <h:inputText value="#{deleteUpdate.id}"/>
+                        <h:commandButton value="Deletar" action="#{deleteUpdate.deleteMaterial()}"/>
+                        <h:commandButton value="Atualizar" action="#{deleteUpdate.updateMaterial()}"/>
+                    </h:form>
+                    
+                    <h:form rendered="#{buscador.tipoView == 5}">
+                        <h:outputLabel value="Deletar linha:"/>
+                        <h:inputText value="#{deleteUpdate.id}"/>
+                        <h:commandButton value="Deletar" action="#{deleteUpdate.deleteCompra()}"/>
+                        <h:commandButton value="Atualizar" action="#{deleteUpdate.updateCompra()}"/>                      
+                    </h:form>
+                    
+                    <h:form rendered="#{buscador.tipoView == 6}">
+                        <h:outputLabel value="Deletar linha:"/>
+                        <h:inputText value="#{deleteUpdate.id}"/>
+                        <h:commandButton value="Deletar" action="#{deleteUpdate.deleteFornecedor()}"/>
+                        <h:commandButton value="Atualizar" action="#{deleteUpdate.updateFornecedor()}"/>
+                    </h:form>
+                    
                 </div>
             </section>
             <footer class="panel-footer">

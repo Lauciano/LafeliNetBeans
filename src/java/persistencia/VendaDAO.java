@@ -23,7 +23,7 @@ public class VendaDAO {
 		return entityManager;
 	}
 	
-	public Venda getById(long id){
+	public Venda getById(int id){
 		return entityManager.find(Venda.class, id);
 	}
 	
@@ -65,7 +65,7 @@ public class VendaDAO {
         }
     }
  
-    public void removeById(final Long id) {
+    public void removeById(int id) {
         try {
         	Venda pessoa = getById(id);
             remove(pessoa);

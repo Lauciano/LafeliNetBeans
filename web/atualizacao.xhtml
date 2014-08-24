@@ -39,150 +39,117 @@
                 </div>
             </nav>
             
-            <section>
-                <h:form styleClass="navbar" rendered="#{loginBean.isLoggedIn}" >
-                    <p:growl autoUpdate="true"/>
-
-                    <p:panelMenu styleClass="collapse navbar-collapse" >
-                        <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Cliente">
-                            <p:menuitem id="clientecd" actionListener="#{cadastro.setTipoCadastro}" value="Cadastrar" icon="ui-icon-disk" update=":formularios"/>
-                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
-                        </p:submenu>
-                        <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Venda">
-                            <p:menuitem id="vendacd" actionListener="#{cadastro.setTipoCadastro}" value="Cadastrar" icon="ui-icon-disk"  update=":formularios"/>
-                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
-                        </p:submenu>
-                        <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Produto">
-                            <p:menuitem id="produtocd" actionListener="#{cadastro.setTipoCadastro}" value="Cadastrar" icon="ui-icon-disk" update=":formularios"/>
-                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
-                        </p:submenu>
-                        <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Material">
-                            <p:menuitem id="materialcd" actionListener="#{cadastro.setTipoCadastro}" value="Cadastrar" icon="ui-icon-disk" update=":formularios"/>
-                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
-                        </p:submenu>
-                        <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Compra">
-                            <p:menuitem id="compracd" actionListener="#{cadastro.setTipoCadastro}" value="Cadastrar" icon="ui-icon-disk" update=":formularios"/>
-                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
-                        </p:submenu>
-                        <p:submenu style="width:16.6%" styleClass="nav navbar-nav" label="Fornecedor">
-                            <p:menuitem id="fornecedorcd" actionListener="#{cadastro.setTipoCadastro}" value="Cadastrar" icon="ui-icon-disk"  update=":formularios"/>
-                            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
-                        </p:submenu>
-                    </p:panelMenu>
-                </h:form>
-            </section>
-            
             <!-- Cadastro de Cliente -->
             <section>
                 <h:panelGroup id="formularios">
-                <h:form id="clienteform" styleClass="panel-body" rendered="#{cadastro.tipoCadastro == 1}">
+                    <h:form id="clienteform" styleClass="panel-body" rendered="#{deleteUpdate.att == 1}">
                     <p:growl id ="msgs" showDetail="true"/>
                     <h:panelGrid columns="2" cellpadding="5">
                         <p:outputLabel value="Nome:"/>
-                        <p:inputText value="#{cliente.nome}"/>
+                        <p:inputText value="#{deleteUpdate.c.nome}"/>
                         
                         <p:outputLabel value="Sobrenome:"/>
-                        <p:inputText value="#{cliente.sobrenome}"/>
+                        <p:inputText value="#{deleteUpdate.c.sobrenome}"/>
                         
                         <p:outputLabel value="Telefone:"/>
-                        <p:inputMask id="phone1" value="#{cliente.telefonep}" mask="(99) 9999-9999"/>
+                        <p:inputMask id="phone1" value="#{deleteUpdate.c.telefonep}" mask="(99) 9999-9999"/>
                         
                         <p:outputLabel value="Telefone Secundário:"/>
-                        <p:inputMask id="phone2" value="#{cliente.telefones}" mask="(99) 9999-9999"/>
+                        <p:inputMask id="phone2" value="#{deleteUpdate.c.telefones}" mask="(99) 9999-9999"/>
                     </h:panelGrid>
-                    <p:commandButton value="Cadastrar" action="#{cliente.cadastra()}" update=":formularios" icon="ui-icon-disk"/>
+                    <p:commandButton value="Cadastrar" action="#{deleteUpdate.commitCliente()}" update=":formularios" icon="ui-icon-disk"/>
                 </h:form>
 
                <!-- Cadastro de Venda -->
-               <h:form id="vendaform" styleClass="panel-body" rendered="#{cadastro.tipoCadastro == 2}">
+               <h:form id="vendaform" styleClass="panel-body" rendered="#{deleteUpdate.att == 2}">
                     <p:growl id ="msgs" showDetail="true"/>
                     <h:panelGrid columns="2" cellpadding="5">
                         <p:outputLabel value="Id do comprador:"/>
-                        <p:inputText value="#{venda.comprador}"/>
+                        <p:inputText value="#{deleteUpdate.v.comprador}"/>
                         
                         <p:outputLabel value="Id do produto:"/>
-                        <p:inputText value="#{venda.produto}"/>
+                        <p:inputText value="#{deleteUpdate.v.produto}"/>
                         
                         <p:outputLabel value="Data da compra:"/>
-                        <p:inputMask value="#{venda.dataDeCompra}" mask="99/99/9999"/>
+                        <p:inputMask value="#{deleteUpdate.v.dataDeCompra}" mask="99/99/9999"/>
                         
                         <p:outputLabel value="Quantidade:"/>
-                        <p:spinner id="minMax" value="#{venda.quantidade}" min="0"/>
+                        <p:spinner id="minMax" value="#{deleteUpdate.v.quantidade}" min="0"/>
                         
                         <p:outputLabel value="Data de entrega:"/>
-                        <p:inputMask value="#{venda.dataEntrega}" mask="99/99/9999"/>
+                        <p:inputMask value="#{deleteUpdate.v.dataEntrega}" mask="99/99/9999"/>
                     </h:panelGrid>
-                    <p:commandButton value="Cadastrar" action="#{venda.cadastra()}" update=":formularios" icon="ui-icon-disk"/>
+                    <p:commandButton value="Cadastrar" action="#{deleteUpdate.commitVenda()}" update=":formularios" icon="ui-icon-disk"/>
                 </h:form>
                
-                <h:form id="produtoform" styleClass="panel-body" rendered="#{cadastro.tipoCadastro == 3}">
+                <h:form id="produtoform" styleClass="panel-body" rendered="#{deleteUpdate.att == 3}">
                     <p:growl id ="msgs" showDetail="true"/>
                     <h:panelGrid columns="2" cellpadding="5">
                         <p:outputLabel value="Nome:"/>
-                        <p:inputText value="#{produto.nome}"/>
+                        <p:inputText value="#{deleteUpdate.p.nome}"/>
                         
-                        <p:outputLabel value="Quantidade:"/>
-                        <p:inputText id="minMax1" value="#{produto.preco}"/>
+                        <p:outputLabel value="Preço:"/>
+                        <p:inputText id="minMax1" value="#{deleteUpdate.p.preco}"/>
                     </h:panelGrid>
-                    <p:commandButton value="Cadastrar" action="#{produto.cadastra()}" update=":formularios" icon="ui-icon-disk"/>
+                    <p:commandButton value="Cadastrar" action="#{deleteUpdate.commitProduto()}" update=":formularios" icon="ui-icon-disk"/>
                 </h:form>
                 
                <!-- Cadastro de Material -->
-                <h:form id="materialform" styleClass="panel-body" rendered="#{cadastro.tipoCadastro == 4}">
+                <h:form id="materialform" styleClass="panel-body" rendered="#{deleteUpdate.att == 4}">
                     <p:growl id ="msgs" showDetail="true"/>
                     <h:panelGrid columns="2" cellpadding="5">
                         <p:outputLabel value="Nome:"/>
-                        <p:inputText value="#{material.nome}"/>
+                        <p:inputText value="#{deleteUpdate.m.nome}"/>
                         
                         <p:outputLabel value="Quantidade:"/>
-                        <p:spinner value="#{material.quantidade}" min="0"/>
+                        <p:spinner value="#{deleteUpdate.m.quantidade}" min="0"/>
                     </h:panelGrid>
-                    <p:commandButton value="Cadastrar" action="#{material.cadastra()}" update=":formularios" icon="ui-icon-disk"/>
+                    <p:commandButton value="Cadastrar" action="#{deleteUpdate.commitMaterial()}" update=":formularios" icon="ui-icon-disk"/>
                 </h:form>
                 
                <!-- Cadastro de Compra -->
-                <h:form id="compraform" styleClass="panel-body" rendered="#{cadastro.tipoCadastro == 5}">
+                <h:form id="compraform" styleClass="panel-body" rendered="#{deleteUpdate.att == 5}">
                     <p:growl id ="msgs" showDetail="true"/>
                     <h:panelGrid columns="2" cellpadding="5">
                         <p:outputLabel value="Id do material:"/>
-                        <p:inputText value="#{compra.id_material}"/>
+                        <p:inputText value="#{deleteUpdate.cm.id_material}"/>
                         
                         <p:outputLabel value="Id do fornecedor:"/>
-                        <p:inputText value="#{compra.id_fornecedor}"/>
+                        <p:inputText value="#{deleteUpdate.cm.id_fornecedor}"/>
                         
                         <p:outputLabel value="Quantidade:"/>
-                        <p:spinner id="minMax1" value="#{compra.quantidade}" min="0"/>
+                        <p:spinner id="minMax1" value="#{deleteUpdate.cm.quantidade}" min="0"/>
                         
                         <p:outputLabel value="Data:"/>
-                        <p:inputMask value="#{compra.data}" mask="99/99/9999"/>
+                        <p:inputMask value="#{deleteUpdate.cm.data}" mask="99/99/9999"/>
                         
                         <p:outputLabel value="Preço:"/>
-                        <p:inputText value="#{compra.preco}"/>
+                        <p:inputText value="#{deleteUpdate.cm.preco}"/>
                         
                     </h:panelGrid>
-                    <p:commandButton value="Cadastrar" action="#{compra.cadastra()}" update=":formularios" icon="ui-icon-disk"/>
+                    <p:commandButton value="Cadastrar" action="#{deleteUpdate.commitCompra()}" update=":formularios" icon="ui-icon-disk"/>
                 </h:form>
                 
-                <h:form id="fornecedorform" styleClass="panel-body" rendered="#{cadastro.tipoCadastro == 6}">
+                <h:form id="fornecedorform" styleClass="panel-body" rendered="#{deleteUpdate.att == 6}">
                     <p:growl id ="msgs" showDetail="true"/>
                     <h:panelGrid columns="2" cellpadding="5">
                         <p:outputLabel value="Nome:"/>
-                        <p:inputText value="#{fornecedor.nome}"/>
+                        <p:inputText value="#{deleteUpdate.f.nome}"/>
                         
                         <p:outputLabel value="CNPJ:"/>
-                        <p:inputText value="#{fornecedor.cnpj}"/>
+                        <p:inputText value="#{deleteUpdate.f.cnpj}"/>
                         
                         <p:outputLabel value="Telefone Primário:"/>
-                        <p:inputMask value="#{fornecedor.telefonep}" mask="(99) 9999-9999"/>
+                        <p:inputMask value="#{deleteUpdate.f.telefonep}" mask="(99) 9999-9999"/>
                         
                         <p:outputLabel value="Telefone Secundário:"/>
-                        <p:inputMask value="#{fornecedor.telefones}"  mask="(99) 9999-9999"/>
+                        <p:inputMask value="#{deleteUpdate.f.telefones}"  mask="(99) 9999-9999"/>
                         
                         <p:outputLabel value="Endereço:"/>
-                        <p:inputText value="#{fornecedor.endereco}"/>
+                        <p:inputText value="#{deleteUpdate.f.endereco}"/>
                         
                     </h:panelGrid>
-                    <p:commandButton value="Cadastrar" action="#{fornecedor.cadastra()}" update=":formularios" icon="ui-icon-disk"/>
+                    <p:commandButton value="Cadastrar" action="#{deleteUpdate.commitFornecedor()}" update=":formularios" icon="ui-icon-disk"/>
                 </h:form>
                 </h:panelGroup>
             </section>

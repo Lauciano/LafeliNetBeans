@@ -23,7 +23,7 @@ public class ClienteDAO {
 		return entityManager;
 	}
 	
-	public Cliente getById(long id){
+	public Cliente getById(int id){
 		return entityManager.find(Cliente.class, id);
 	}
 	
@@ -65,9 +65,9 @@ public class ClienteDAO {
         }
     }
  
-    public void removeById(final Long id) {
+    public void removeById(int id) {
         try {
-        	Cliente pessoa = getById(id);
+            Cliente pessoa = getById(id);
             remove(pessoa);
         } catch (Exception ex) {
             ex.printStackTrace();

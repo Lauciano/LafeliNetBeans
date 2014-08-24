@@ -22,7 +22,7 @@ public class CompraDAO {
 		return entityManager;
 	}
 	
-	public Compra getById(long id){
+	public Compra getById(int id){
 		return entityManager.find(Compra.class, id);
 	}
 	
@@ -64,7 +64,7 @@ public class CompraDAO {
         }
     }
  
-    public void removeById(final Long id) {
+    public void removeById(int id) {
         try {
         	Compra p = getById(id);
             remove(p);

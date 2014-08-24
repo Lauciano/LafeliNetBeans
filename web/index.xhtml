@@ -52,19 +52,27 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-offset-5">
-                            <p:selectOneMenu value="#{buscador.tipo}" style="width:35%" rendered="#{loginBean.isLoggedIn}">
-                                <f:selectItems value="#{buscador.lista}" />
-                            </p:selectOneMenu>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-offset-5">
-                            <h:form id="frmSearch">
-                                <h:inputText value="#{buscador.texto}" id="txtSearch" style="width:25%" rendered="#{loginBean.isLoggedIn}" />
-                                <h:commandButton actionListener="#{buscador.buscar}" value="Buscar" style="width:10%" id="btnSearch" rendered="#{loginBean.isLoggedIn}"/>
+                            <h:form>
+                                <p:selectOneMenu id="dropdown1" value="#{buscador.texto}" style="width:35%" rendered="#{loginBean.isLoggedIn}">
+                                    <f:selectItem itemValue="Cliente" itemLabel="Cliente" />
+                                    <f:selectItem itemValue="Venda" itemLabel="Venda" />
+                                    <f:selectItem itemValue="Produto" itemLabel="Produto" />
+                                    <f:selectItem itemValue="Fornecedor" itemLabel="Fornecedor" />
+                                    <f:selectItem itemValue="Compra" itemLabel="Compra" />
+                                    <f:selectItem itemValue="Material" itemLabel="Material" />
+                                </p:selectOneMenu>
+                                <h:commandButton action="#{buscador.buscar()}" value="Buscar" style="width:10%" id="btnSearch" rendered="#{loginBean.isLoggedIn}"/>
                             </h:form>
                         </div>
                     </div>
+                    <!--<div class="row">
+                        <div class="col-md-offset-5">
+                            <h:form id="frmSearch">
+                                <h:inputText value="#{buscador.texto}" id="txtSearch" style="width:25%" rendered="#{loginBean.isLoggedIn}" />
+                                <h:commandButton action="#{buscador.buscar()}" value="Buscar" style="width:10%" id="btnSearch" rendered="#{loginBean.isLoggedIn}"/>
+                            </h:form>
+                        </div>
+                    </div>-->
                 </div>
                 <div class="panel-body">
                     <img class="img-responsive" style="margin: 0 auto;" src="resources/img/home.jpg" alt="Conjunto de Cadeiras Paradas"/>

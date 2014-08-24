@@ -22,19 +22,17 @@ import javax.faces.event.ActionEvent;
 @ManagedBean
 @SessionScoped
 public class Buscador {
-    private String texto;
-    private String tipo;
+    private String texto = "";
+    private String tipo = "";
     private Integer tipoView;
     private Map<String,Integer> lista;
     
     public Buscador() {
-        texto = "";
-        tipo = "";
     }
     
     @PostConstruct
     public void init() {
-        lista = new HashMap<>();
+        lista = new HashMap<String,Integer>();
         lista.put("Cliente", 1);
         lista.put("Venda", 2);
         lista.put("Produto", 3);
@@ -43,10 +41,10 @@ public class Buscador {
         lista.put("Fornecedor", 6);
     }
     
-    public String buscar(ActionEvent e) {
-        tipoView = lista.get(tipo);
-        String comp = e.getComponent().getId();
-        return "search.xhtml#" + comp;
+    public String buscar() {
+        System.err.println("Pegando " + texto);
+        tipoView = lista.get(texto);
+        return "search";
     }
     
     //public String getBuscar() {
@@ -58,6 +56,7 @@ public class Buscador {
     }
     
     public void setTexto(String texto){
+        System.out.println("SETANDO TEXTO COMO" + texto);
         this.texto = texto;
     }
     
@@ -66,6 +65,7 @@ public class Buscador {
     }
     
     public void setTipo(String tipo){
+        System.out.println("SETANDO TIPO COMO" + texto);
         this.tipo = tipo;
     }
     
@@ -76,4 +76,14 @@ public class Buscador {
     public void setLista(HashMap<String, Integer> lista){
         this.lista = lista;
     }
+
+    public Integer getTipoView() {
+        return tipoView;
+    }
+
+    public void setTipoView(Integer tipoView) {
+        this.tipoView = tipoView;
+    }
+    
+    
 }

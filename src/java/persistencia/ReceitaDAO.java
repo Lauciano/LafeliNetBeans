@@ -22,7 +22,7 @@ public class ReceitaDAO {
 		return entityManager;
 	}
 	
-	public Receita getById(long id){
+	public Receita getById(int id){
 		return entityManager.find(Receita.class, id);
 	}
 	
@@ -64,7 +64,7 @@ public class ReceitaDAO {
         }
     }
  
-    public void removeById(final Long id) {
+    public void removeById(int id) {
         try {
         	Receita p = getById(id);
             remove(p);

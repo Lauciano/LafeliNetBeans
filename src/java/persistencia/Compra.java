@@ -32,8 +32,6 @@ public class Compra implements Serializable {
 	
 	@Column(name="PRECO", nullable = false)
 	private Double preco;
-	
-        private Date d;
         
 	public Compra(){
 	}
@@ -85,14 +83,6 @@ public class Compra implements Serializable {
 	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
-
-        public Date getD() {
-            return d;
-        }
-
-        public void setD(Date d) {
-            this.d = d;
-        }
         
         public void cadastra(){
             
@@ -106,7 +96,7 @@ public class Compra implements Serializable {
             p.setId_material(id_material);
             p.setPreco(preco);
             p.setQuantidade(quantidade);
-            p.setData(format.format(d));
+            p.setData(data);
             
             CompraDAO cdao = new CompraDAO();
 
@@ -120,7 +110,7 @@ public class Compra implements Serializable {
             id_material = 0;
             preco = 0.0;
             quantidade = 0;
-            d = new Date();
+            data = "";
         }
 	
 }

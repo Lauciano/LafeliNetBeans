@@ -22,7 +22,7 @@ public class MaterialDAO {
 		return entityManager;
 	}
 	
-	public Material getById(long id){
+	public Material getById(int id){
 		return entityManager.find(Material.class, id);
 	}
 	
@@ -64,7 +64,7 @@ public class MaterialDAO {
         }
     }
  
-    public void removeById(final Long id) {
+    public void removeById(int id) {
         try {
         	Material material = getById(id);
             remove(material);

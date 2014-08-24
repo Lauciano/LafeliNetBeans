@@ -35,28 +35,9 @@ public class Venda implements Serializable {
 	
 	@Column(name="DATA_ENTREGA", nullable = false)
 	private String dataEntrega;
-        
-        private Date d1;
-        private Date d2;
 	
 	public Venda(){
 	}
-
-        public Date getD1() {
-            return d1;
-        }
-
-        public void setD1(Date d1) {
-            this.d1 = d1;
-        }
-
-        public Date getD2() {
-            return d2;
-        }
-
-        public void setD2(Date d2) {
-            this.d2 = d2;
-        }
 
 	public Integer getId() {
 		return id;
@@ -123,8 +104,8 @@ public class Venda implements Serializable {
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
             v.setComprador(comprador);
-            v.setDataDeCompra(format.format(d2));
-            v.setDataEntrega(format.format(d1));
+            v.setDataDeCompra(dataDeCompra);
+            v.setDataEntrega(dataEntrega);
             v.setQuantidade(quantidade);
             v.setProduto(produto);
             v.setVenda(1);
@@ -138,8 +119,8 @@ public class Venda implements Serializable {
         
         public void limpaValores(){
             comprador = 0;
-            d1 = new Date();
-            d2 = new Date();
+            dataDeCompra = "";
+            dataEntrega = "";
             quantidade = 0;
             produto = 0;
             venda = 0;

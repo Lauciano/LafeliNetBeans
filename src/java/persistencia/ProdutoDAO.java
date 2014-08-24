@@ -22,7 +22,7 @@ public class ProdutoDAO {
 		return entityManager;
 	}
 	
-	public Produto getById(long id){
+	public Produto getById(int id){
 		return entityManager.find(Produto.class, id);
 	}
 	
@@ -64,7 +64,7 @@ public class ProdutoDAO {
         }
     }
  
-    public void removeById(final Long id) {
+    public void removeById(int id) {
         try {
         	Produto p = getById(id);
             remove(p);

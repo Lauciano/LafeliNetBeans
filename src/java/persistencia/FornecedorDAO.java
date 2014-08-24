@@ -22,7 +22,7 @@ public class FornecedorDAO {
 		return entityManager;
 	}
 	
-	public Fornecedor getById(long id){
+	public Fornecedor getById(int id){
 		return entityManager.find(Fornecedor.class, id);
 	}
 	
@@ -64,7 +64,7 @@ public class FornecedorDAO {
         }
     }
  
-    public void removeById(final Long id) {
+    public void removeById(int id) {
         try {
         	Fornecedor fornecedor = getById(id);
             remove(fornecedor);
