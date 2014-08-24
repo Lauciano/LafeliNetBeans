@@ -22,7 +22,6 @@ import javax.faces.event.ActionEvent;
 @ManagedBean
 @SessionScoped
 public class Buscador {
-    private String texto = "";
     private String tipo = "";
     private Integer tipoView;
     private Map<String,Integer> lista;
@@ -42,22 +41,9 @@ public class Buscador {
     }
     
     public String buscar() {
-        System.err.println("Pegando " + texto);
-        tipoView = lista.get(texto);
+        System.err.println("Pegando " + tipo);
+        tipoView = lista.get(tipo);
         return "search";
-    }
-    
-    //public String getBuscar() {
-    //    return buscar();
-    //}
-    
-    public String getTexto() {
-        return texto;
-    }
-    
-    public void setTexto(String texto){
-        System.out.println("SETANDO TEXTO COMO" + texto);
-        this.texto = texto;
     }
     
     public String getTipo(){
@@ -65,7 +51,7 @@ public class Buscador {
     }
     
     public void setTipo(String tipo){
-        System.out.println("SETANDO TIPO COMO" + texto);
+        System.out.println("SETANDO TIPO COMO" + tipo);
         this.tipo = tipo;
     }
     

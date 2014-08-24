@@ -20,15 +20,24 @@
                 </h1>
             </header>
             <nav class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                    <h:outputText value="#{loginBean.username}" styleClass="navbar-brand" rendered="#{loginBean.isLoggedIn}" />
+                </div>
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="index.xhtml">Home</a></li>
-                            <li><a href="produtos.xhtml">Produtos</a></li>
+                            <li>
+                                <a href="index.xhtml">Home</a>
+                            </li>
+                            <li>
+                                <p:link value="Cadastro" href="cadastro.xhtml" rendered="#{loginBean.isLoggedIn}" />
+                            </li>
+                            <li class="active">
+                                <p:link value="Consulta" href="#" rendered="#{loginBean.isLoggedIn}" />
+                            </li>
                         </ul>
                         <div>
                             <h:form id="frmLogin" styleClass="navbar-form navbar-right">
-                                <h:outputText value="Olá, #{loginBean.username}" styleClass="navbar-text" rendered="#{loginBean.isLoggedIn}" />
                                 <h:commandButton action="#{loginBean.logoff}" value="Sair" styleClass="btn btn-default" rendered="#{loginBean.isLoggedIn}" />
                                 <h:inputText value="#{loginBean.username}" id="username" styleClass="form-control" rendered="#{loginBean.isNotLoggedIn}" />
                                 <h:inputSecret value="#{loginBean.password}" styleClass="form-control" rendered="#{loginBean.isNotLoggedIn}" />
@@ -57,7 +66,7 @@
                         <p:outputLabel value="Telefone Secundário:"/>
                         <p:inputMask id="phone2" value="#{deleteUpdate.c.telefones}" mask="(99) 9999-9999"/>
                     </h:panelGrid>
-                    <p:commandButton value="Cadastrar" action="#{deleteUpdate.commitCliente()}" update=":formularios" icon="ui-icon-disk"/>
+                    <p:commandButton value="Salvar" action="#{deleteUpdate.commitCliente()}" update=":formularios" icon="ui-icon-disk"/>
                 </h:form>
 
                <!-- Cadastro de Venda -->
@@ -79,7 +88,7 @@
                         <p:outputLabel value="Data de entrega:"/>
                         <p:inputMask value="#{deleteUpdate.v.dataEntrega}" mask="99/99/9999"/>
                     </h:panelGrid>
-                    <p:commandButton value="Cadastrar" action="#{deleteUpdate.commitVenda()}" update=":formularios" icon="ui-icon-disk"/>
+                    <p:commandButton value="Salvar" action="#{deleteUpdate.commitVenda()}" update=":formularios" icon="ui-icon-disk"/>
                 </h:form>
                
                 <h:form id="produtoform" styleClass="panel-body" rendered="#{deleteUpdate.att == 3}">
@@ -91,7 +100,7 @@
                         <p:outputLabel value="Preço:"/>
                         <p:inputText id="minMax1" value="#{deleteUpdate.p.preco}"/>
                     </h:panelGrid>
-                    <p:commandButton value="Cadastrar" action="#{deleteUpdate.commitProduto()}" update=":formularios" icon="ui-icon-disk"/>
+                    <p:commandButton value="Salvar" action="#{deleteUpdate.commitProduto()}" update=":formularios" icon="ui-icon-disk"/>
                 </h:form>
                 
                <!-- Cadastro de Material -->
@@ -104,7 +113,7 @@
                         <p:outputLabel value="Quantidade:"/>
                         <p:spinner value="#{deleteUpdate.m.quantidade}" min="0"/>
                     </h:panelGrid>
-                    <p:commandButton value="Cadastrar" action="#{deleteUpdate.commitMaterial()}" update=":formularios" icon="ui-icon-disk"/>
+                    <p:commandButton value="Salvar" action="#{deleteUpdate.commitMaterial()}" update=":formularios" icon="ui-icon-disk"/>
                 </h:form>
                 
                <!-- Cadastro de Compra -->
@@ -127,7 +136,7 @@
                         <p:inputText value="#{deleteUpdate.cm.preco}"/>
                         
                     </h:panelGrid>
-                    <p:commandButton value="Cadastrar" action="#{deleteUpdate.commitCompra()}" update=":formularios" icon="ui-icon-disk"/>
+                    <p:commandButton value="Salvar" action="#{deleteUpdate.commitCompra()}" update=":formularios" icon="ui-icon-disk"/>
                 </h:form>
                 
                 <h:form id="fornecedorform" styleClass="panel-body" rendered="#{deleteUpdate.att == 6}">
@@ -149,7 +158,7 @@
                         <p:inputText value="#{deleteUpdate.f.endereco}"/>
                         
                     </h:panelGrid>
-                    <p:commandButton value="Cadastrar" action="#{deleteUpdate.commitFornecedor()}" update=":formularios" icon="ui-icon-disk"/>
+                    <p:commandButton value="Salvar" action="#{deleteUpdate.commitFornecedor()}" update=":formularios" icon="ui-icon-disk"/>
                 </h:form>
                 </h:panelGroup>
             </section>

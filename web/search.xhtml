@@ -30,10 +30,10 @@
                                 <a href="index.xhtml">Home</a>
                             </li>
                             <li>
-                                <a href="produtos.xhtml">Produtos</a>
-                            </li>
-                            <li>
                                 <p:link value="Cadastro" href="cadastro.xhtml" rendered="#{loginBean.isLoggedIn}" />
+                            </li>
+                            <li class="active">
+                                <p:link value="Consulta" href="#" rendered="#{loginBean.isLoggedIn}" />
                             </li>
                         </ul>
                         <div>
@@ -51,18 +51,22 @@
             <section id="page-content-wrapper">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-offset-5">
-                            <h:form>
-                                <p:selectOneMenu id="dropdown1" value="#{buscador.texto}" style="width:35%" rendered="#{loginBean.isLoggedIn}">
-                                    <f:selectItem itemValue="Cliente" itemLabel="Cliente" />
-                                    <f:selectItem itemValue="Venda" itemLabel="Venda" />
-                                    <f:selectItem itemValue="Produto" itemLabel="Produto" />
-                                    <f:selectItem itemValue="Fornecedor" itemLabel="Fornecedor" />
-                                    <f:selectItem itemValue="Compra" itemLabel="Compra" />
-                                    <f:selectItem itemValue="Material" itemLabel="Material" />
-                                </p:selectOneMenu>
-                                <h:commandButton action="#{buscador.buscar()}" value="Buscar" style="width:10%" id="btnSearch" rendered="#{loginBean.isLoggedIn}"/>
-                            </h:form>
+                        <div class="col-md-3 col-md-offset-4">
+                            <p:panel header="Busque por ID" style="margin-bottom:10px;">
+                                <h:form>
+                                    <h:panelGrid columns="2" >
+                                        <p:selectOneMenu id="dropdown1" value="#{buscador.tipo}" style="width:150px; margin-right:3px">
+                                            <f:selectItem itemValue="Cliente" itemLabel="Cliente" />
+                                            <f:selectItem itemValue="Venda" itemLabel="Venda" />
+                                            <f:selectItem itemValue="Produto" itemLabel="Produto" />
+                                            <f:selectItem itemValue="Fornecedor" itemLabel="Fornecedor" />
+                                            <f:selectItem itemValue="Compra" itemLabel="Compra" />
+                                            <f:selectItem itemValue="Material" itemLabel="Material" />
+                                        </p:selectOneMenu>
+                                        <h:commandButton action="#{buscador.buscar()}" value="Buscar" styleClass="btn btn-default" id="btnSearch"/>
+                                    </h:panelGrid>
+                                </h:form>
+                            </p:panel>
                         </div>
                     </div>
                 </div>
@@ -192,45 +196,45 @@
                     </div>
                     
                     <h:form rendered="#{buscador.tipoView == 1}">
-                        <h:outputLabel value="Deletar linha:"/>
+                        <h:outputLabel value="ID:"/>
                         <h:inputText value="#{deleteUpdate.id}"/>
-                        <h:commandButton value="Deletar" action="#{deleteUpdate.deleteCliente()}"/>
-                        <h:commandButton value="Atualizar" action="#{deleteUpdate.updateCliente()}"/>
+                        <h:commandButton styleClass="btn btn-default" value="Deletar" action="#{deleteUpdate.deleteCliente()}"/>
+                        <h:commandButton styleClass="btn btn-default" value="Atualizar" action="#{deleteUpdate.updateCliente()}"/>
                     </h:form>
                     
                     <h:form rendered="#{buscador.tipoView == 2}">
-                        <h:outputLabel value="Deletar linha:"/>
+                        <h:outputLabel value="ID:"/>
                         <h:inputText value="#{deleteUpdate.id}"/>
-                        <h:commandButton value="Deletar" action="#{deleteUpdate.deleteVenda()}"/>
-                        <h:commandButton value="Atualizar" action="#{deleteUpdate.updateVenda()}"/>
+                        <h:commandButton styleClass="btn btn-default" value="Deletar" action="#{deleteUpdate.deleteVenda()}"/>
+                        <h:commandButton styleClass="btn btn-default" value="Atualizar" action="#{deleteUpdate.updateVenda()}"/>
                     </h:form>
                     
                     <h:form rendered="#{buscador.tipoView == 3}">
-                        <h:outputLabel value="Deletar linha:"/>
+                        <h:outputLabel value="ID:"/>
                         <h:inputText value="#{deleteUpdate.id}"/>
-                        <h:commandButton value="Deletar" action="#{deleteUpdate.deleteProduto()}"/>
-                        <h:commandButton value="Atualizar" action="#{deleteUpdate.updateProduto()}"/>
+                        <h:commandButton styleClass="btn btn-default" value="Deletar" action="#{deleteUpdate.deleteProduto()}"/>
+                        <h:commandButton styleClass="btn btn-default" value="Atualizar" action="#{deleteUpdate.updateProduto()}"/>
                     </h:form>
                     
                     <h:form rendered="#{buscador.tipoView == 4}">
-                        <h:outputLabel value="Deletar linha:"/>
+                        <h:outputLabel value="ID:"/>
                         <h:inputText value="#{deleteUpdate.id}"/>
-                        <h:commandButton value="Deletar" action="#{deleteUpdate.deleteMaterial()}"/>
-                        <h:commandButton value="Atualizar" action="#{deleteUpdate.updateMaterial()}"/>
+                        <h:commandButton styleClass="btn btn-default" value="Deletar" action="#{deleteUpdate.deleteMaterial()}"/>
+                        <h:commandButton styleClass="btn btn-default" value="Atualizar" action="#{deleteUpdate.updateMaterial()}"/>
                     </h:form>
                     
                     <h:form rendered="#{buscador.tipoView == 5}">
-                        <h:outputLabel value="Deletar linha:"/>
+                        <h:outputLabel value="ID:"/>
                         <h:inputText value="#{deleteUpdate.id}"/>
-                        <h:commandButton value="Deletar" action="#{deleteUpdate.deleteCompra()}"/>
-                        <h:commandButton value="Atualizar" action="#{deleteUpdate.updateCompra()}"/>                      
+                        <h:commandButton styleClass="btn btn-default" value="Deletar" action="#{deleteUpdate.deleteCompra()}"/>
+                        <h:commandButton styleClass="btn btn-default" value="Atualizar" action="#{deleteUpdate.updateCompra()}"/>                      
                     </h:form>
                     
                     <h:form rendered="#{buscador.tipoView == 6}">
-                        <h:outputLabel value="Deletar linha:"/>
+                        <h:outputLabel value="ID:"/>
                         <h:inputText value="#{deleteUpdate.id}"/>
-                        <h:commandButton value="Deletar" action="#{deleteUpdate.deleteFornecedor()}"/>
-                        <h:commandButton value="Atualizar" action="#{deleteUpdate.updateFornecedor()}"/>
+                        <h:commandButton styleClass="btn btn-default" value="Deletar" action="#{deleteUpdate.deleteFornecedor()}"/>
+                        <h:commandButton styleClass="btn btn-default" value="Atualizar" action="#{deleteUpdate.updateFornecedor()}"/>
                     </h:form>
                     
                 </div>

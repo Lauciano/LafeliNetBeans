@@ -27,13 +27,13 @@
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav">
                             <li class="active">
-                                <a href="index.xhtml">Home</a>
-                            </li>
-                            <li>
-                                <a href="produtos.xhtml">Produtos</a>
+                                <a href="#">Home</a>
                             </li>
                             <li>
                                 <p:link value="Cadastro" href="cadastro.xhtml" rendered="#{loginBean.isLoggedIn}" />
+                            </li>
+                            <li>
+                                <p:link value="Consulta" href="search.xhtml" rendered="#{loginBean.isLoggedIn}" />
                             </li>
                         </ul>
                         <div>
@@ -49,31 +49,6 @@
             </nav>
             
             <section id="page-content-wrapper">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-offset-5">
-                            <h:form>
-                                <p:selectOneMenu id="dropdown1" value="#{buscador.texto}" style="width:35%" rendered="#{loginBean.isLoggedIn}">
-                                    <f:selectItem itemValue="Cliente" itemLabel="Cliente" />
-                                    <f:selectItem itemValue="Venda" itemLabel="Venda" />
-                                    <f:selectItem itemValue="Produto" itemLabel="Produto" />
-                                    <f:selectItem itemValue="Fornecedor" itemLabel="Fornecedor" />
-                                    <f:selectItem itemValue="Compra" itemLabel="Compra" />
-                                    <f:selectItem itemValue="Material" itemLabel="Material" />
-                                </p:selectOneMenu>
-                                <h:commandButton action="#{buscador.buscar()}" value="Buscar" style="width:10%" id="btnSearch" rendered="#{loginBean.isLoggedIn}"/>
-                            </h:form>
-                        </div>
-                    </div>
-                    <!--<div class="row">
-                        <div class="col-md-offset-5">
-                            <h:form id="frmSearch">
-                                <h:inputText value="#{buscador.texto}" id="txtSearch" style="width:25%" rendered="#{loginBean.isLoggedIn}" />
-                                <h:commandButton action="#{buscador.buscar()}" value="Buscar" style="width:10%" id="btnSearch" rendered="#{loginBean.isLoggedIn}"/>
-                            </h:form>
-                        </div>
-                    </div>-->
-                </div>
                 <div class="panel-body">
                     <img class="img-responsive" style="margin: 0 auto;" src="resources/img/home.jpg" alt="Conjunto de Cadeiras Paradas"/>
                 </div>
